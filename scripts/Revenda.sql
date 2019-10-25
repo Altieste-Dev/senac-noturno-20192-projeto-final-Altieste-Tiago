@@ -5,12 +5,12 @@ Create table carro
 	Id_carro int not null primary key
 	, Marca varchar(255) not null,
 	, Modelo varchar(255) not null
+	
 ;
 
 
 Create table estoque
 	Id_carro int not null primary key
-	, idmodelo foreing key
 	, ano date not null
 	, cor varchar(45) not null
 	, quilometragem double not null
@@ -24,7 +24,7 @@ Id_vendedor int not null primary key
 , Nome varchar (45)
 , Sexo varchar (15)
 , Cpf varchar (11)
-, Celular 
+, Celular varchar (11) 
 ;
 
 Create table cliente

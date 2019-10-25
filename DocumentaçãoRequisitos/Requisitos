@@ -11,9 +11,14 @@ Consultar Clientes;
 Atualizar Clientes;
 Excluir Clientes;
 Controlar Estoque;
-Cadastrar, atualizar, consultar e excluir vendas;
+Cadastrar, atualizar, consultar e excluir vendas
+- Registrar nas vendas Veículo (marca, modelo, ano, 
+
+;
 Gerar Relatório de Vendas (definido por período);
 Gerar Relatório de Vendas por Vendedor;
 Consultar vendas por vendedor;
 Consultar Comissões por Vendedor - Mensal;
 Consultar Comissões por Vendedor - Anual;
+
+
