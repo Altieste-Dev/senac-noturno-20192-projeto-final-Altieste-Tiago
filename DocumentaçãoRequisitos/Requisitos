@@ -1,0 +1,19 @@
+Documentação dos Requisitos:
+
+Requisitos Funcionais:
+ 
+Cadastrar Vendedores e Veículos;
+Consultar Vendedores e Veículos;
+Atualizar Vendedores e Veículos;
+Excluir Vendedores e Veículos;
+Cadastrar Clientes;
+Consultar Clientes;
+Atualizar Clientes;
+Excluir Clientes;
+Controlar Estoque;
+Cadastrar, atualizar, consultar e excluir vendas;
+Gerar Relatório de Vendas (definido por período);
+Gerar Relatório de Vendas por Vendedor;
+Consultar vendas por vendedor;
+Consultar Comissões por Vendedor - Mensal;
+Consultar Comissões por Vendedor - Anual;
