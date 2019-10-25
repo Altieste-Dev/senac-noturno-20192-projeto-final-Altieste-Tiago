@@ -12,7 +12,7 @@ Atualizar Clientes;
 Excluir Clientes;
 Controlar Estoque;
 Cadastrar, atualizar, consultar e excluir vendas
-- Registrar nas vendas Veículo (marca, modelo, ano, 
+- Registrar nas vendas Veículo (marca, modelo, ano, cor, quilometragem, placa, valorFIPE
 
 ;
 Gerar Relatório de Vendas (definido por período);
