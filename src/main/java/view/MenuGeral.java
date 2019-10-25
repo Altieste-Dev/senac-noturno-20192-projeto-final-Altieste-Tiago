@@ -84,6 +84,13 @@ public class MenuGeral extends JFrame {
 		menuBar.add(mnVeculos);
 
 		JMenuItem mntmCadastrar_1 = new JMenuItem("Cadastrar");
+		mntmCadastrar_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CadastrarVeiculo painelCadastrarVeiculo = new CadastrarVeiculo();
+				setContentPane(painelCadastrarVeiculo);
+				revalidate();
+			}
+		});
 		mnVeculos.add(mntmCadastrar_1);
 
 		JMenuItem mntmConsultar = new JMenuItem("Consultar");

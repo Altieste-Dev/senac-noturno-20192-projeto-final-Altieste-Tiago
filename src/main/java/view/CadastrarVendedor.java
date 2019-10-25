@@ -7,13 +7,13 @@ import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
 
 public class CadastrarVendedor extends JPanel {
 	private JTextField nomevendedor;
-	private JTextField sexovendedor;
 	private JTextField textField;
 	JFormattedTextField formattedCpf;
 	JFormattedTextField formattedTel;
@@ -47,11 +47,6 @@ public class CadastrarVendedor extends JPanel {
 		lblSexo.setBounds(49, 104, 61, 16);
 		add(lblSexo);
 
-		sexovendedor = new JTextField();
-		sexovendedor.setBounds(152, 99, 162, 26);
-		add(sexovendedor);
-		sexovendedor.setColumns(10);
-
 		JButton btnSalvarVendedor = new JButton("Salvar");
 		btnSalvarVendedor.setBounds(152, 212, 117, 29);
 		add(btnSalvarVendedor);
@@ -75,7 +70,7 @@ public class CadastrarVendedor extends JPanel {
 			formattedCpf = new JFormattedTextField(mascaraCpf1);
 		} catch (ParseException e) {
 		}
-		formattedCpf.setBounds(152, 71, 162, 26);
+		formattedCpf.setBounds(152, 71, 134, 26);
 		add(formattedCpf);
 
 		MaskFormatter mascaraTel1;
@@ -87,6 +82,14 @@ public class CadastrarVendedor extends JPanel {
 
 		formattedTel.setBounds(152, 132, 134, 26);
 		add(formattedTel);
+
+		JRadioButton rdbtnFem = new JRadioButton("F");
+		rdbtnFem.setBounds(152, 101, 42, 23);
+		add(rdbtnFem);
+
+		JRadioButton rdbtnMasc = new JRadioButton("M");
+		rdbtnMasc.setBounds(206, 101, 50, 23);
+		add(rdbtnMasc);
 
 	}
 }

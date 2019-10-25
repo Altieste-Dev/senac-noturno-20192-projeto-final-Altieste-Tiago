@@ -7,15 +7,15 @@ import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
 
 public class CadastrarCliente extends JPanel {
 	private JTextField nomecliente;
-	private JTextField telefonecliente;
-	private JTextField sexocliente;
 	private JFormattedTextField txtCpf;
+	private JFormattedTextField formattedTel;
 
 	/**
 	 * Create the panel.
@@ -42,17 +42,12 @@ public class CadastrarCliente extends JPanel {
 			txtCpf = new JFormattedTextField(mascaraCpf);
 		} catch (ParseException e) {
 		}
-		txtCpf.setBounds(152, 66, 162, 26);
+		txtCpf.setBounds(152, 66, 117, 26);
 		add(txtCpf);
 
 		JLabel lblTelefone = new JLabel("Telefone:");
 		lblTelefone.setBounds(49, 137, 61, 16);
 		add(lblTelefone);
-
-		telefonecliente = new JTextField();
-		telefonecliente.setBounds(152, 132, 162, 26);
-		add(telefonecliente);
-		telefonecliente.setColumns(10);
 
 		JLabel lblCadastroDeCliente = new JLabel("Cadastro de Cliente");
 		lblCadastroDeCliente.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
@@ -61,17 +56,30 @@ public class CadastrarCliente extends JPanel {
 		add(lblCadastroDeCliente);
 
 		JLabel lblSexo = new JLabel("Sexo:");
-		lblSexo.setBounds(49, 104, 61, 16);
+		lblSexo.setBounds(49, 103, 61, 16);
 		add(lblSexo);
-
-		sexocliente = new JTextField();
-		sexocliente.setBounds(152, 99, 162, 26);
-		add(sexocliente);
-		sexocliente.setColumns(10);
 
 		JButton btnSalvarCliente = new JButton("Salvar");
 		btnSalvarCliente.setBounds(152, 176, 117, 29);
 		add(btnSalvarCliente);
+
+		JRadioButton rdbtnF = new JRadioButton("F");
+		rdbtnF.setBounds(152, 100, 45, 23);
+		add(rdbtnF);
+
+		JRadioButton rdbtnM = new JRadioButton("M");
+		rdbtnM.setBounds(209, 100, 45, 23);
+		add(rdbtnM);
+
+		MaskFormatter mascaraTel1;
+		try {
+			mascaraTel1 = new MaskFormatter("(##) #####-####");
+			formattedTel = new JFormattedTextField(mascaraTel1);
+		} catch (ParseException e) {
+		}
+
+		formattedTel.setBounds(152, 132, 111, 26);
+		add(formattedTel);
 
 	}
 }
