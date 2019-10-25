@@ -6,6 +6,7 @@ public class Cliente {
 	String sexo;
 	String cpf;
 	String celular;
+	LocalDate dataNascimento; //ta certo isso? usar LocalDate no Eclipse e Date no Script
 	
 	public Cliente(String nome, String sexo, String cpf, String celular) {
 		super();

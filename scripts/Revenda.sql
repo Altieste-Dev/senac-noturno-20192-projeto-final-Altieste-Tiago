@@ -32,8 +32,9 @@ Id_cliente
 , Nome varchar (45)
 , Sexo varchar (15)
 , Cpf varchar (11)
-, Tel_residencial
-, Tel_celular
+, Tel_Residencial
+, Tel_Celular
+, Data_Nascimento date
 ;
 Create table vendas
 Id_vendas primary key
