@@ -1,78 +1,83 @@
 package view;
 
 import java.awt.Font;
+import java.text.ParseException;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSlider;
 import javax.swing.SwingConstants;
+import javax.swing.text.MaskFormatter;
+
+import net.miginfocom.swing.MigLayout;
 
 public class CadastrarVeiculo extends JPanel {
+	JFormattedTextField formattedTexPlaca;
 
 	/**
 	 * Create the panel.
 	 */
 	public CadastrarVeiculo() {
-		setLayout(null);
+		setLayout(new MigLayout("",
+				"[48px,fill][13px,fill][61px,fill][2px][36px,fill][37px,fill][44px,fill][13px,fill][184px,fill]",
+				"[16px][31px,fill][31px,fill][30px,fill][26px,fill][29px,fill]"));
 
 		JLabel lblCadastrarVeiculo = new JLabel("Cadastrar Veículos");
 		lblCadastrarVeiculo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCadastrarVeiculo.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
-		lblCadastrarVeiculo.setBounds(6, 6, 438, 16);
-		add(lblCadastrarVeiculo);
+		add(lblCadastrarVeiculo, "cell 0 0 9 1,grow");
 
 		JLabel lblMarca = new JLabel("Marca:");
-		lblMarca.setBounds(16, 35, 61, 16);
-		add(lblMarca);
+		add(lblMarca, "cell 0 1,alignx left,aligny center");
 
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(60, 30, 99, 27);
-		add(comboBox);
+		JComboBox comboMarca = new JComboBox();
+		add(comboMarca, "cell 2 1 3 1,growx,aligny bottom");
 
 		JLabel lblModelo = new JLabel("Modelo:");
-		lblModelo.setBounds(203, 35, 61, 16);
-		add(lblModelo);
+		add(lblModelo, "cell 6 1,alignx left,aligny center");
 
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(256, 30, 99, 27);
-		add(comboBox_1);
+		JComboBox comboModelo = new JComboBox();
+		add(comboModelo, "cell 8 1,growx,aligny top");
 
 		JLabel lblCor = new JLabel("Cor:");
-		lblCor.setBounds(16, 74, 61, 16);
-		add(lblCor);
+		add(lblCor, "cell 0 2,alignx left,aligny center");
 
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setBounds(45, 69, 99, 27);
-		add(comboBox_2);
+		JComboBox comboCor = new JComboBox();
+		add(comboCor, "cell 2 2 3 1,growx,aligny bottom");
 
 		JLabel lblAno = new JLabel("Ano:");
-		lblAno.setBounds(203, 74, 44, 16);
-		add(lblAno);
+		add(lblAno, "cell 6 2,growx,aligny center");
 
 		JLabel lblKm = new JLabel("Km:");
-		lblKm.setBounds(16, 120, 61, 16);
-		add(lblKm);
+		add(lblKm, "cell 0 3,alignx left,aligny center");
 
 		JFormattedTextField formattedKm = new JFormattedTextField();
-		formattedKm.setBounds(45, 115, 61, 26);
-		add(formattedKm);
+		add(formattedKm, "cell 2 3,growx,aligny bottom");
 
 		JLabel lblPlca = new JLabel("Placa:");
-		lblPlca.setBounds(203, 120, 61, 16);
-		add(lblPlca);
+		add(lblPlca, "cell 6 3,alignx left,aligny center");
 
-		JFormattedTextField formattedTexPlaca = new JFormattedTextField();
-		formattedTexPlaca.setBounds(247, 115, 67, 26);
-		add(formattedTexPlaca);
+		MaskFormatter mascaraNasc;
+		try {
+			mascaraNasc = new MaskFormatter("???-####");
+			formattedTexPlaca = new JFormattedTextField(mascaraNasc);
+		} catch (ParseException e) {
+		}
+		add(formattedTexPlaca, "cell 8 3,growx,aligny top");
 
-		JSlider slider = new JSlider();
-		slider.setMajorTickSpacing(1);
-		slider.setMinimum(10);
-		slider.setMaximum(2019);
-		slider.setBounds(237, 68, 147, 29);
-		add(slider);
+		JComboBox comboAno = new JComboBox();
+		add(comboAno, "cell 8 2,growx,aligny top");
+
+		JLabel lblFipe = new JLabel("Fipe:");
+		add(lblFipe, "cell 0 4,alignx left,aligny top");
+
+		JFormattedTextField formattedFipe = new JFormattedTextField();
+		add(formattedFipe, "cell 2 4 3 1,growx,aligny top");
+
+		JButton btnSalVar = new JButton("Sal var");
+		add(btnSalVar, "cell 4 5 3 1,growx,aligny top");
 
 	}
 }

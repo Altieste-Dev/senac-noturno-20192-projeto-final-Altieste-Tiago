@@ -1,8 +1,11 @@
 package view;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.ParseException;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
@@ -12,29 +15,35 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
 
+import controller.ClienteController;
+import net.miginfocom.swing.MigLayout;
+
 public class CadastrarCliente extends JPanel {
+	protected static final String SEXO_MASCULINO = "M";
+	protected static final String SEXO_FEMININO = "F";
 	private JTextField nomecliente;
 	private JFormattedTextField txtCpf;
 	private JFormattedTextField formattedTel;
+	JFormattedTextField formattedNascimento;
+	private JRadioButton rdbtnF;
+	private JRadioButton rdbtnM;
 
 	/**
 	 * Create the panel.
 	 */
 	public CadastrarCliente() {
-		setLayout(null);
+		setLayout(new MigLayout("", "[122px,fill][24px,fill][45px][12px][235px]",
+				"[16px][26px][26px][23px][26px][26px][29px]"));
 
 		nomecliente = new JTextField();
-		nomecliente.setBounds(152, 38, 162, 26);
-		add(nomecliente);
+		add(nomecliente, "cell 2 1 3 1,alignx left,aligny top");
 		nomecliente.setColumns(10);
 
 		JLabel lblNome = new JLabel("Nome:");
-		lblNome.setBounds(49, 43, 61, 16);
-		add(lblNome);
+		add(lblNome, "cell 0 1,alignx center,aligny center");
 
 		JLabel lblCpf = new JLabel("Cpf:");
-		lblCpf.setBounds(49, 71, 61, 16);
-		add(lblCpf);
+		add(lblCpf, "cell 0 2,alignx center,aligny center");
 
 		MaskFormatter mascaraCpf;
 		try {
@@ -42,34 +51,47 @@ public class CadastrarCliente extends JPanel {
 			txtCpf = new JFormattedTextField(mascaraCpf);
 		} catch (ParseException e) {
 		}
-		txtCpf.setBounds(152, 66, 117, 26);
-		add(txtCpf);
+		add(txtCpf, "cell 2 2 3 1,alignx left,aligny top");
 
 		JLabel lblTelefone = new JLabel("Telefone:");
-		lblTelefone.setBounds(49, 137, 61, 16);
-		add(lblTelefone);
+		add(lblTelefone, "cell 0 5,alignx center,aligny center");
 
 		JLabel lblCadastroDeCliente = new JLabel("Cadastro de Cliente");
 		lblCadastroDeCliente.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
 		lblCadastroDeCliente.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCadastroDeCliente.setBounds(6, 6, 438, 16);
-		add(lblCadastroDeCliente);
-
-		JLabel lblSexo = new JLabel("Sexo:");
-		lblSexo.setBounds(49, 103, 61, 16);
-		add(lblSexo);
+		add(lblCadastroDeCliente, "cell 0 0 5 1,grow");
 
 		JButton btnSalvarCliente = new JButton("Salvar");
-		btnSalvarCliente.setBounds(152, 176, 117, 29);
-		add(btnSalvarCliente);
+		btnSalvarCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ClienteController cliController = new ClienteController();
+				String nomeDigitado = nomecliente.getName();
+				String cpfDigitado = txtCpf.getText();
+				String sexoDigitado = "";
+				if (rdbtnM.isSelected()) {
+					sexoDigitado = SEXO_MASCULINO;
+				}
+				if (rdbtnF.isSelected()) {
+					sexoDigitado = SEXO_FEMININO;
+				}
+				cliController.salvar
 
-		JRadioButton rdbtnF = new JRadioButton("F");
-		rdbtnF.setBounds(152, 100, 45, 23);
-		add(rdbtnF);
+			}
+		});
+		add(btnSalvarCliente, "cell 2 6 3 1,alignx left,aligny top");
 
-		JRadioButton rdbtnM = new JRadioButton("M");
-		rdbtnM.setBounds(209, 100, 45, 23);
-		add(rdbtnM);
+		JLabel lblSexo = new JLabel("Sexo:");
+		add(lblSexo, "cell 0 3,alignx center,aligny center");
+
+		rdbtnF = new JRadioButton("F");
+		add(rdbtnF, "cell 2 3,growx,aligny top");
+
+		rdbtnM = new JRadioButton("M");
+		add(rdbtnM, "cell 4 3,alignx left,aligny top");
+
+		ButtonGroup radioGroupSexo = new ButtonGroup();
+		radioGroupSexo.add(rdbtnM);
+		radioGroupSexo.add(rdbtnF);
 
 		MaskFormatter mascaraTel1;
 		try {
@@ -77,9 +99,18 @@ public class CadastrarCliente extends JPanel {
 			formattedTel = new JFormattedTextField(mascaraTel1);
 		} catch (ParseException e) {
 		}
+		add(formattedTel, "cell 2 5 3 1,alignx left,aligny top");
 
-		formattedTel.setBounds(152, 132, 111, 26);
-		add(formattedTel);
+		JLabel lblNascimento = new JLabel("Nascimento:");
+		add(lblNascimento, "cell 0 4,alignx right,aligny center");
+
+		MaskFormatter mascaraNasc;
+		try {
+			mascaraNasc = new MaskFormatter("##/##/####");
+			formattedNascimento = new JFormattedTextField(mascaraNasc);
+		} catch (ParseException e) {
+		}
+		add(formattedNascimento, "cell 2 4 3 1,alignx left,aligny top");
 
 	}
 }

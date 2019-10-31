@@ -16,6 +16,7 @@ public class ConsultarCliente extends JPanel {
 	private JTable table;
 	private JTextField nomeconsultacliente;
 	JFormattedTextField formattedCpf;
+	JFormattedTextField formattedNasci;
 
 	/**
 	 * Create the panel.
@@ -30,7 +31,7 @@ public class ConsultarCliente extends JPanel {
 		add(lblNewLabel);
 
 		table = new JTable();
-		table.setBounds(16, 88, 413, 153);
+		table.setBounds(16, 126, 413, 153);
 		add(table);
 
 		JLabel lblNome = new JLabel("Nome:");
@@ -38,16 +39,16 @@ public class ConsultarCliente extends JPanel {
 		add(lblNome);
 
 		nomeconsultacliente = new JTextField();
-		nomeconsultacliente.setBounds(101, 29, 130, 26);
+		nomeconsultacliente.setBounds(128, 34, 130, 26);
 		add(nomeconsultacliente);
 		nomeconsultacliente.setColumns(10);
 
 		JButton btnConsultarClientes = new JButton("Consultar");
-		btnConsultarClientes.setBounds(77, 253, 117, 29);
+		btnConsultarClientes.setBounds(77, 291, 117, 29);
 		add(btnConsultarClientes);
 
 		JButton btnExcluirClientes = new JButton("Excluir");
-		btnExcluirClientes.setBounds(272, 253, 117, 29);
+		btnExcluirClientes.setBounds(272, 291, 117, 29);
 		add(btnExcluirClientes);
 
 		JLabel lblCpf = new JLabel("Cpf:");
@@ -60,7 +61,20 @@ public class ConsultarCliente extends JPanel {
 			formattedCpf = new JFormattedTextField(mascaraCpf1);
 		} catch (ParseException e) {
 		}
-		formattedCpf.setBounds(101, 55, 130, 26);
+		formattedCpf.setBounds(128, 60, 130, 26);
 		add(formattedCpf);
+
+		JLabel lblNascimento = new JLabel("Nascimento:");
+		lblNascimento.setBounds(40, 88, 87, 16);
+		add(lblNascimento);
+
+		MaskFormatter mascaraNasc;
+		try {
+			mascaraNasc = new MaskFormatter("##/##/####");
+			formattedNasci = new JFormattedTextField(mascaraNasc);
+		} catch (ParseException e) {
+		}
+		formattedNasci.setBounds(128, 83, 130, 26);
+		add(formattedNasci);
 	}
 }

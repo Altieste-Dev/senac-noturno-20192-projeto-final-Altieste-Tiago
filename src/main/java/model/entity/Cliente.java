@@ -1,12 +1,12 @@
 package model.entity;
 
 public class Cliente {
-	
+
 	String nome;
 	String sexo;
 	String cpf;
 	String celular;
-	
+
 	public Cliente(String nome, String sexo, String cpf, String celular) {
 		super();
 		this.nome = nome;
@@ -14,10 +14,9 @@ public class Cliente {
 		this.cpf = cpf;
 		this.celular = celular;
 	}
-	
+
 	public Cliente() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getNome() {
@@ -51,7 +50,5 @@ public class Cliente {
 	public void setCelular(String celular) {
 		this.celular = celular;
 	}
-	
-	
 
 }
