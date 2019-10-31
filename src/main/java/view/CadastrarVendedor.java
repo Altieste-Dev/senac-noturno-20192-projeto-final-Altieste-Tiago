@@ -1,26 +1,18 @@
 package view;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.ParseException;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
-
-import controller.aula05.ClienteController;
-import model.entity.aula05.Cliente;
-import model.entity.aula05.Endereco;
-import model.entity.aula05.Telefone;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class CadastrarVendedor extends JPanel {
 	private JTextField nomevendedor;
@@ -60,29 +52,7 @@ public class CadastrarVendedor extends JPanel {
 		JButton btnSalvarVendedor = new JButton("Salvar");
 		btnSalvarVendedor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ClienteController cliController = new ClienteController();
-				String nomeDigitado = txtNome.getText();
-				String sobrenomeDigitado = txtSobrenome.getText();
-				String cpfDigitado = txtCPF.getText().replace("-", "").replace(".", "");
-				Endereco enderecoSelecionado = (Endereco) cbEndereco.getSelectedItem();
-
-				String mensagem = cliController.validarCamposSalvar(nomeDigitado, sobrenomeDigitado, cpfDigitado,
-						enderecoSelecionado);
-
-				if (mensagem.isEmpty()) {
-					novoCliente = new Cliente(nomeDigitado, sobrenomeDigitado, cpfDigitado, new ArrayList<Telefone>(),
-							enderecoSelecionado);
-					novoCliente = cliController.salvar(novoCliente);
-
-					if (novoCliente.getId() > 0) {
-						btnAdicionarTelefone.setEnabled(true);
-						btnSalvar.setEnabled(false);
-					}
-				} else {
-					JOptionPane.showMessageDialog(null, mensagem, "Aten��o", JOptionPane.WARNING_MESSAGE);
-				}
-			}
-		});
+			};
 		});
 		btnSalvarVendedor.setBounds(152, 212, 117, 29);
 		add(btnSalvarVendedor);

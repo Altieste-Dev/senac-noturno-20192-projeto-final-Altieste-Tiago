@@ -74,7 +74,7 @@ public class CadastrarCliente extends JPanel {
 				if (rdbtnF.isSelected()) {
 					sexoDigitado = SEXO_FEMININO;
 				}
-				cliController.salvar
+				// cliController.salvar
 
 			}
 		});
