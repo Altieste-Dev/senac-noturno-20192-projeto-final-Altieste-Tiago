@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.ParseException;
 
 import javax.swing.JButton;
@@ -12,48 +14,55 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
 
+import net.miginfocom.swing.MigLayout;
+
 public class ConsultarCliente extends JPanel {
 	private JTable table;
 	private JTextField nomeconsultacliente;
 	JFormattedTextField formattedCpf;
 	JFormattedTextField formattedNasci;
+	private int larguraDosPaineis;
+	private int alturaDaTela;
 
 	/**
 	 * Create the panel.
 	 */
 	public ConsultarCliente() {
-		setLayout(null);
+		setLayout(new MigLayout("", "[121px][1px][130px][14px][315.00px]",
+				"[16px][26px][16px][7px][3px][2px][21px][153px][29px]"));
 
 		JLabel lblNewLabel = new JLabel("Consulta de Clientes");
 		lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 18));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(6, 6, 438, 16);
-		add(lblNewLabel);
+		add(lblNewLabel, "cell 0 0 5 1,grow");
 
 		table = new JTable();
-		table.setBounds(16, 126, 413, 153);
-		add(table);
+		add(table, "cell 0 7 5 1,grow");
 
 		JLabel lblNome = new JLabel("Nome:");
-		lblNome.setBounds(40, 34, 61, 16);
-		add(lblNome);
+		add(lblNome, "cell 0 1,alignx center,aligny top");
 
 		nomeconsultacliente = new JTextField();
-		nomeconsultacliente.setBounds(128, 34, 130, 26);
-		add(nomeconsultacliente);
+		add(nomeconsultacliente, "cell 2 1,alignx left,aligny top");
 		nomeconsultacliente.setColumns(10);
 
 		JButton btnConsultarClientes = new JButton("Consultar");
-		btnConsultarClientes.setBounds(77, 291, 117, 29);
-		add(btnConsultarClientes);
+		add(btnConsultarClientes, "cell 0 8,alignx center,aligny top");
+
+		JButton btnEditar = new JButton("Editar");
+		btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AlterarCliente painelAlterarCliente = new AlterarCliente();
+				painelAlterarCliente.setVisible(true);
+			}
+		});
+		add(btnEditar, "cell 2 8,alignx center");
 
 		JButton btnExcluirClientes = new JButton("Excluir");
-		btnExcluirClientes.setBounds(272, 291, 117, 29);
-		add(btnExcluirClientes);
+		add(btnExcluirClientes, "cell 4 8,alignx left,aligny top");
 
 		JLabel lblCpf = new JLabel("Cpf:");
-		lblCpf.setBounds(40, 60, 61, 16);
-		add(lblCpf);
+		add(lblCpf, "cell 0 2,alignx center,aligny top");
 
 		MaskFormatter mascaraCpf1;
 		try {
@@ -61,12 +70,10 @@ public class ConsultarCliente extends JPanel {
 			formattedCpf = new JFormattedTextField(mascaraCpf1);
 		} catch (ParseException e) {
 		}
-		formattedCpf.setBounds(128, 60, 130, 26);
-		add(formattedCpf);
+		add(formattedCpf, "cell 2 2 1 3,growx,aligny top");
 
 		JLabel lblNascimento = new JLabel("Nascimento:");
-		lblNascimento.setBounds(40, 88, 87, 16);
-		add(lblNascimento);
+		add(lblNascimento, "cell 0 6,alignx right,aligny top");
 
 		MaskFormatter mascaraNasc;
 		try {
@@ -74,7 +81,6 @@ public class ConsultarCliente extends JPanel {
 			formattedNasci = new JFormattedTextField(mascaraNasc);
 		} catch (ParseException e) {
 		}
-		formattedNasci.setBounds(128, 83, 130, 26);
-		add(formattedNasci);
+		add(formattedNasci, "cell 2 4 1 3,growx,aligny top");
 	}
 }
