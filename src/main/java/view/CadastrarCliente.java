@@ -16,6 +16,7 @@ import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
 
 import controller.ClienteController;
+import model.entity.Cliente;
 import net.miginfocom.swing.MigLayout;
 
 public class CadastrarCliente extends JPanel {
@@ -65,17 +66,19 @@ public class CadastrarCliente extends JPanel {
 		btnSalvarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ClienteController cliController = new ClienteController();
-				String nomeDigitado = nomecliente.getName();
-				String cpfDigitado = txtCpf.getText();
-				String sexoDigitado = "";
+				Cliente cliente = new Cliente();
+				cliente.setNome(nomecliente.getText());
+				cliente.setCpf(txtCpf.getText());
 				if (rdbtnM.isSelected()) {
-					sexoDigitado = SEXO_MASCULINO;
+					cliente.setSexo("Masculino");
 				}
 				if (rdbtnF.isSelected()) {
-					sexoDigitado = SEXO_FEMININO;
+					cliente.setSexo("Feminino");
 				}
-				// cliController.salvar
+				cliente.setCelular(formattedTel.getText());
+				String nascimentoDigitado = formattedNascimento.getText();
 
+				cliController.salvar(cliente);
 			}
 		});
 		add(btnSalvarCliente, "cell 2 6 3 1,alignx left,aligny top");

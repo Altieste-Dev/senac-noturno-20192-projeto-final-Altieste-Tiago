@@ -8,12 +8,8 @@ public class Cliente {
 	String sexo;
 	String cpf;
 	String celular;
-<<<<<<< HEAD
+	LocalDate dataNascimento; // ta certo isso? usar LocalDate no Eclipse e Date no Script
 
-=======
-	LocalDate dataNascimento; //ta certo isso? usar LocalDate no Eclipse e Date no Script
-	
->>>>>>> branch 'master' of https://github.com/Altieste07/senac-noturno-20192-projeto-final-Altieste-Tiago.git
 	public Cliente(String nome, String sexo, String cpf, String celular) {
 		super();
 		this.nome = nome;
