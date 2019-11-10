@@ -1,12 +1,12 @@
 package model.entity;
 
 public class Vendedor {
-	
-	String nome;
-	String sexo;
-	String cpf;
-	String celular;
-	Double comissao;
+	private int id;
+	private String nome;
+	private String sexo;
+	private String cpf;
+	private String celular;
+	private Double comissao;
 	
 	public Vendedor(String nome, String sexo, String cpf, String celular, Double comissao) {
 		super();
@@ -61,6 +61,16 @@ public class Vendedor {
 	public void setComissao(Double comissao) {
 		this.comissao = comissao;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	
 	
 	
 }
