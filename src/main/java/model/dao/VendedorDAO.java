@@ -43,53 +43,126 @@ public class VendedorDAO implements BaseDAO<Vendedor> {
 
 	public boolean excluir(int id) {
 		Connection conexao = Banco.getConnection();
-		Statement statement = Banco.getStatement(conexao);
-		String sql = " DELETE FROM EMPREGADO WHERE ID = " + id;
+		String sql = " DELETE FROM EMPREGADO WHERE ID = " + "WHERE ID = ?";
+		PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql);
+	
 		
-		int quantidadeRegistrosExcluidos = 0;
+		boolean sucessoDelete = false;
+		
 		try {
-			quantidadeRegistrosExcluidos = statement.executeUpdate(sql);
+			prepStmt.setInt(1, id);
+			int codigoRetorno = prepStmt.executeUpdate();
+			
+			if (codigoRetorno == 1) {
+				sucessoDelete = true;
+			}
+			
 		} catch (SQLException e){
 			System.out.println("Erro ao excluir empregado.");
-			System.out.println("Err: " + e.getMessage());
+			System.out.println("Erro: " + e.getMessage());
 		} finally {
-			Banco.closeStatement(statement);
+			Banco.closePreparedStatement(prepStmt);
 			Banco.closeConnection(conexao);
 		}
 		
-		return quantidadeRegistrosExcluidos > 0;
+		return sucessoDelete;
 	}
 
 	public boolean alterar(Vendedor novoVendedor) {
+		boolean sucessoUpdate = false;
+		
 		Connection conexao = Banco.getConnection();
 		String sql = " UPDATE VENDEDOR"
 				+ " SET NOME=?, SEXO=?, CPF=?, CONTATO=?, COMISSAO=? "
 				+ " WHERE ID = ?";
-		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql);
+		PreparedStatement prepstmt = Banco.getPreparedStatement(conexao, sql);
 		int registrosAlterados = 0;
 		try {
-			stmt.setString(1, novoVendedor.getNome());
-			stmt.setString(2, novoVendedor.getSexo());
-			stmt.setString(novoVendedor.getCpf());
-			stmt.setString(4, novoVendedor.getCelular());
-			stmt.setDouble(5, novoVendedor.getComissao());
-			registrosAlterados = stmt.executeUpdate();
+			prepstmt.setString(1, novoVendedor.getNome());
+			prepstmt.setString(2, novoVendedor.getSexo());
+			prepstmt.setString(3, novoVendedor.getCpf());
+			prepstmt.setString(4, novoVendedor.getCelular());
+			prepstmt.setDouble(5, novoVendedor.getComissao());
+			registrosAlterados = prepstmt.executeUpdate();
 			
+			if (registrosAlterados == 1) {
+				sucessoUpdate = true;
+			}
 			
+		} catch (SQLException e) {
+			System.out.println("Erro ao atualizar o vendedor. Causa: " + e.getMessage());
+		} finally {
+			Banco.closePreparedStatement(prepstmt);
+			Banco.closeConnection(conexao);
 		}
-		return false;
+		
+		return sucessoUpdate;
 	}
 
 	public Vendedor consultarPorId(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "SELECT * FROM VENDEDOR " + "WHERE ID=?";
+		
+		Connection conexao = Banco.getConnection();
+		PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql);
+		Vendedor v = null;
+		
+		try {
+			prepStmt.setInt(1, id);
+			ResultSet result = prepStmt.executeQuery();
+			
+			while (result.next()) {
+				v = new Vendedor();
+				
+				v.setId(result.getInt("ID"));
+				v.setNome(result.getString("NOME"));
+				v.setSexo(result.getString("SEXO"));
+				v.setCpf(result.getString("CPF"));
+				v.setCelular(result.getString("CONTATO"));
+				v.setComissao(result.getDouble("COMISSAO"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+				
+		return v;
 	}
 
 	public ArrayList<Vendedor> consultarTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conexao = Banco.getConnection();
+		String sql = " SELECT * FROM CLIENTE ";
+		PreparedStatement stmt = Banco.getPreparedStatement(conexao, sql);
+		
+		ArrayList<Vendedor> vendedores = new ArrayList<Vendedor>();
+		try {
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next()) {
+				Vendedor v = construirVendedorDoResultSet(rs);
+				vendedores.add(v);
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro ao consultar vendedores.");
+			System.out.println("Erro: " + e.getMessage());
+		}
+		
+		return vendedores;
 	}
 
+	private Vendedor construirVendedorDoResultSet(ResultSet result) {
+		Vendedor v = new Vendedor();
+		
+		try {
+			v.setId(result.getInt("ID"));
+			v.setNome(result.getString("NOME"));
+			v.setSexo(result.getString("SEXO"));
+			v.setCpf(result.getString("CPF"));
+			v.setCelular(result.getString("CONTATO"));
+			v.setComissao(result.getDouble("COMISSAO"));
+		} catch (SQLException e) {
+			e.printStackTrace();			
+		}
+		return v;
+	}
+	
 	
 
 }
