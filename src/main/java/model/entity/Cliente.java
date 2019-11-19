@@ -1,25 +1,54 @@
 package model.entity;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class Cliente {
 
+	int id;
 	String nome;
 	String sexo;
 	String cpf;
 	String celular;
-	LocalDate dataNascimento; // ta certo isso? usar LocalDate no Eclipse e Date no Script
+	String residencial;
+	Date dataNascimento; // ta certo isso? usar LocalDate no Eclipse e Date no Script
 
-	public Cliente(String nome, String sexo, String cpf, String celular) {
+	public Cliente(int id, String nome, String sexo, String cpf, String celular, String residencial) {
 		super();
+		this.id = id;
 		this.nome = nome;
 		this.sexo = sexo;
 		this.cpf = cpf;
 		this.celular = celular;
+		this.residencial = residencial;
 	}
 
 	public Cliente() {
 		super();
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getResidencial() {
+		return residencial;
+	}
+
+	public void setResidencial(String residencial) {
+		this.residencial = residencial;
+	}
+
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 
 	public String getNome() {

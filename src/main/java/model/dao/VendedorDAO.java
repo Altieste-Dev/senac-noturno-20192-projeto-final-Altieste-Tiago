@@ -43,7 +43,7 @@ public class VendedorDAO implements BaseDAO<Vendedor> {
 
 	public boolean excluir(int id) {
 		Connection conexao = Banco.getConnection();
-		String sql = " DELETE FROM EMPREGADO WHERE ID = " + "WHERE ID = ?";
+		String sql = " DELETE FROM EMPREGADO WHERE ID = ?";
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql);
 	
 		
