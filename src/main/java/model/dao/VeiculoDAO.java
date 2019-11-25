@@ -2,29 +2,34 @@ package model.dao;
 
 import java.util.ArrayList;
 
-public class VeiculoDAO implements BaseDAO {
+import model.entity.Veiculo;
 
-	public Object salvar(Object novaEntidade) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+public class VeiculoDAO implements BaseDAO<Veiculo> {
 
 	public boolean excluir(int id) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public boolean alterar(Object entidade) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public Object consultarPorId(int id) {
+	public ArrayList consultarTodos() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public ArrayList consultarTodos() {
+	public Veiculo salvar(Veiculo novoVeiculo) {
+		int novoid = -1;
+		String sql = " INSERT INTO ESTOQUE "
+		
+		
+		return null;
+	}
+
+	public boolean alterar(Veiculo entidade) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public Veiculo consultarPorId(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

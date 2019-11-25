@@ -2,11 +2,13 @@ package model.entity;
 
 public class Modelo {
 	
+	int id;
 	String marca;
 	String modelo;
 	
-	public Modelo(String marca, String modelo) {
+	public Modelo(int id, String marca, String modelo) {
 		super();
+		this.id = id;
 		this.marca = marca;
 		this.modelo = modelo;
 	}
@@ -15,6 +17,12 @@ public class Modelo {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getMarca() {
 		return marca;
 	}
