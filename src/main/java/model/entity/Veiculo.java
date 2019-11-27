@@ -7,15 +7,18 @@ public class Veiculo {
 	double quilometragem;
 	String placa;
 	double valorFIPE;
+	String situacao;
 	Modelo modelo;
 	
 	
-	public Veiculo(int ano, String cor, double quilometragem, String placa, double valorFIPE, Modelo modelo) {
+	public Veiculo(int ano, String cor, double quilometragem, String placa, 
+			String situacao, double valorFIPE, Modelo modelo) {
 		super();
 		this.ano = ano;
 		this.cor = cor;
 		this.quilometragem = quilometragem;
 		this.placa = placa;
+		this.situacao = situacao;
 		this.valorFIPE = valorFIPE;
 		this.modelo = modelo;
 	}
@@ -39,6 +42,16 @@ public class Veiculo {
 
 	public String getCor() {
 		return cor;
+	}
+
+
+	public String getSituacao() {
+		return situacao;
+	}
+
+
+	public void setSituacao(String situacao) {
+		this.situacao = situacao;
 	}
 
 

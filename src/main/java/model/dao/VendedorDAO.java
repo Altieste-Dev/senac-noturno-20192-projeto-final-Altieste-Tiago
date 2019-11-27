@@ -75,15 +75,15 @@ public class VendedorDAO implements BaseDAO<Vendedor> {
 		String sql = " UPDATE VENDEDOR"
 				+ " SET NOME=?, SEXO=?, CPF=?, CONTATO=?, COMISSAO=? "
 				+ " WHERE ID = ?";
-		PreparedStatement prepstmt = Banco.getPreparedStatement(conexao, sql);
+		PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql);
 		int registrosAlterados = 0;
 		try {
-			prepstmt.setString(1, novoVendedor.getNome());
-			prepstmt.setString(2, novoVendedor.getSexo());
-			prepstmt.setString(3, novoVendedor.getCpf());
-			prepstmt.setString(4, novoVendedor.getCelular());
-			prepstmt.setDouble(5, novoVendedor.getComissao());
-			registrosAlterados = prepstmt.executeUpdate();
+			prepStmt.setString(1, novoVendedor.getNome());
+			prepStmt.setString(2, novoVendedor.getSexo());
+			prepStmt.setString(3, novoVendedor.getCpf());
+			prepStmt.setString(4, novoVendedor.getCelular());
+			prepStmt.setDouble(5, novoVendedor.getComissao());
+			registrosAlterados = prepStmt.executeUpdate();
 			
 			if (registrosAlterados == 1) {
 				sucessoUpdate = true;
@@ -92,7 +92,7 @@ public class VendedorDAO implements BaseDAO<Vendedor> {
 		} catch (SQLException e) {
 			System.out.println("Erro ao atualizar o vendedor. Causa: " + e.getMessage());
 		} finally {
-			Banco.closePreparedStatement(prepstmt);
+			Banco.closePreparedStatement(prepStmt);
 			Banco.closeConnection(conexao);
 		}
 		
