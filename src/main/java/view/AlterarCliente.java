@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
 
-import controller.ClienteController;
+import controller.ControllerCliente;
 import model.entity.Cliente;
 import net.miginfocom.swing.MigLayout;
 
@@ -65,7 +65,7 @@ public class AlterarCliente extends JPanel {
 		JButton btnSalvarCliente = new JButton("Salvar");
 		btnSalvarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ClienteController cliController = new ClienteController();
+				ControllerCliente cliController = new ControllerCliente();
 				Cliente cliente = new Cliente();
 				cliente.setNome(nomecliente.getText());
 				cliente.setCpf(txtCpf.getText());
