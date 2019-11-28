@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.ParseException;
 
 import javax.swing.ButtonGroup;
@@ -7,15 +9,22 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
+import controller.ControllerVendedor;
+import model.entity.Vendedor;
 import net.miginfocom.swing.MigLayout;
 
 public class ConsultarVendedor extends JPanel {
 	private JTextField textNome;
+	private JTextField textCPF;
+	private JTextField textTel;
+	private JTextField textComissao;
+	private Vendedor novoVendedor;
 
 	/**
 	 * Create the panel.
@@ -39,17 +48,18 @@ public class ConsultarVendedor extends JPanel {
 		JLabel lblCpf = new JLabel("CPF:");
 		add(lblCpf, "cell 0 3,alignx trailing");
 
-		JFormattedTextField formattedCPF = new JFormattedTextField();
+		textCPF = new JTextField();
 		MaskFormatter mascaraCpf1;
 		try {
 			mascaraCpf1 = new MaskFormatter("###.###.###-##");
 			mascaraCpf1.setValueContainsLiteralCharacters(false);
 			mascaraCpf1.setOverwriteMode(true);
-			formattedCPF = new JFormattedTextField(mascaraCpf1);
+			textCPF = new JFormattedTextField(mascaraCpf1);
 			mascaraCpf1.setValidCharacters("0123456789");
 		} catch (ParseException e) {
 		}
-		add(formattedCPF, "cell 1 3,growx");
+		add(textCPF, "cell 1 3,growx");
+		textCPF.setColumns(10);
 
 		JLabel lblSexo = new JLabel("Sexo:");
 		add(lblSexo, "cell 0 4,alignx right");
@@ -57,20 +67,18 @@ public class ConsultarVendedor extends JPanel {
 		JLabel lblTelefone = new JLabel("Telefone:");
 		add(lblTelefone, "cell 0 5,alignx trailing");
 
-		JFormattedTextField formattedTel = new JFormattedTextField();
+		textTel = new JTextField();
 		MaskFormatter mascaraTel1;
 		try {
 			mascaraTel1 = new MaskFormatter("(##) #####-####");
-			formattedTel = new JFormattedTextField(mascaraTel1);
+			textTel = new JFormattedTextField(mascaraTel1);
 		} catch (ParseException e) {
 		}
-		add(formattedTel, "cell 1 5,growx");
+		add(textTel, "cell 1 5,growx");
+		textTel.setColumns(10);
 
 		JLabel lblComisso = new JLabel("Comissão:");
 		add(lblComisso, "cell 0 6,alignx trailing");
-
-		JFormattedTextField formattedComissao = new JFormattedTextField();
-		add(formattedComissao, "cell 1 6,growx");
 
 		ButtonGroup radioButtonGroupSexo = new ButtonGroup();
 		final JRadioButton rbSexFem = new JRadioButton("F");
@@ -82,12 +90,43 @@ public class ConsultarVendedor extends JPanel {
 		add(rbSexMas, "cell 1 4");
 		radioButtonGroupSexo.add(rbSexMas);
 
+		textComissao = new JTextField();
+		add(textComissao, "cell 1 6,growx");
+		textComissao.setColumns(10);
+
 		JButton btnExcluir = new JButton("Excluir");
 		add(btnExcluir, "flowx,cell 1 8");
 
-		JButton btnSalvarVendedor = new JButton("Salvar");
+		JButton btnAlterarVendedor = new JButton("Alterar");
+		btnAlterarVendedor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ControllerVendedor controllerVendedor = new ControllerVendedor();
 
-		add(btnSalvarVendedor, "cell 1 8");
+				String nome = textNome.getText();
+				String sexo = " ";
+				String cpf = (String) textCPF.getText();
+				String celular = textTel.getText();
+				String comissao = textComissao.getText();
+
+				if (rbSexFem.isSelected()) {
+					sexo = "F";
+				}
+
+				if (rbSexMas.isSelected()) {
+					sexo = "M";
+				}
+
+				String mensagem = controllerVendedor.validarCamposSalvar(nome, sexo, cpf, celular, comissao);
+				if (mensagem.isEmpty()) {
+					novoVendedor = new Vendedor(0, nome, sexo, cpf, celular, Double.valueOf(comissao));
+					novoVendedor = controllerVendedor.salvar(novoVendedor);
+				} else {
+					JOptionPane.showMessageDialog(null, mensagem, "Aten��o", JOptionPane.WARNING_MESSAGE);
+				}
+			}
+		});
+
+		add(btnAlterarVendedor, "cell 1 8");
 
 	}
 
