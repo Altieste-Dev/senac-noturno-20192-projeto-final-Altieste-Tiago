@@ -9,7 +9,7 @@ import java.sql.Statement;
 
 public class Banco {
 	
-	private static final String DRIVER = "com.mysql.jdbc.Driver";
+	private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 	private static final String BANCODADOS = "mydb";
 	private static final String CONEXAO = "jdbc:mysql://localhost:3306/" + BANCODADOS
 			+ "?useTimezone=true&serverTimezone=UTC";
@@ -64,6 +64,7 @@ public class Banco {
 		}
 	}
 	
+	
 	public static PreparedStatement getPreparedStatement(Connection conn) {
 		try {
 			PreparedStatement stmt = null;
@@ -73,7 +74,7 @@ public class Banco {
 			return null;
 		}
 	}
-	
+
 	public static PreparedStatement getPreparedStatement(Connection conn, String sql) {
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
@@ -83,7 +84,7 @@ public class Banco {
 			return null;
 		}
 	}
-
+	
 	public static PreparedStatement getPreparedStatement(Connection conn, String sql, int tipoRetorno) {
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql, tipoRetorno);

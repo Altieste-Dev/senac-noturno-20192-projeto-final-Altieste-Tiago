@@ -15,29 +15,30 @@ public class VendedorDAO implements BaseDAO<Vendedor> {
 		String sql = "INSERT INTO VENDEDOR (NOME, SEXO, CPF,"
 				+ " CONTATO, COMISSAO) "
 				+ "VALUES(?,?,?,?,?)";
-		
-	Connection conn = Banco.getConnection();
-	PreparedStatement stmt = Banco.getPreparedStatement(conn, sql, PreparedStatement.RETURN_GENERATED_KEYS);
-	
-	try {
-		stmt.setString(1, novoVendedor.getNome());
-		stmt.setString(2, novoVendedor.getSexo());
-		stmt.setString(3, novoVendedor.getCpf());
-		stmt.setString(4, novoVendedor.getCelular());
-		stmt.setDouble(5, novoVendedor.getComissao());
-		
-	stmt.execute();
-	
-	ResultSet rs = stmt.getGeneratedKeys();
-	if(rs.next()) {
-		novoVendedor.setId(rs.getInt(1));
-	}
-	} catch (SQLException e) {
-		System.out.println("Erro ao inserir novo Vendendor. ");
-		System.out.println("Erro: " + e.getMessage());
-	
-	}
-				
+
+		Connection conn = Banco.getConnection();
+		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql, PreparedStatement.RETURN_GENERATED_KEYS);
+
+		try {
+			//stmt.setInt(0, novoVendedor.getid());
+			stmt.setString(1, novoVendedor.getNome());
+			stmt.setString(2, novoVendedor.getSexo());
+			stmt.setString(3, novoVendedor.getCpf());
+			stmt.setString(4, novoVendedor.getCelular());
+			stmt.setDouble(5, novoVendedor.getComissao());
+			
+			stmt.execute();
+
+			ResultSet rs = stmt.getGeneratedKeys();
+			if(rs.next()) {
+				novoVendedor.setId(rs.getInt(1));
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro ao inserir novo Vendendor. ");
+			System.out.println("Erro: " + e.getMessage());
+
+		}
+
 		return novoVendedor;
 	}
 
@@ -45,18 +46,18 @@ public class VendedorDAO implements BaseDAO<Vendedor> {
 		Connection conexao = Banco.getConnection();
 		String sql = " DELETE FROM EMPREGADO WHERE ID = ?";
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql);
-	
-		
+
+
 		boolean sucessoDelete = false;
-		
+
 		try {
 			prepStmt.setInt(1, id);
 			int codigoRetorno = prepStmt.executeUpdate();
-			
+
 			if (codigoRetorno == 1) {
 				sucessoDelete = true;
 			}
-			
+
 		} catch (SQLException e){
 			System.out.println("Erro ao excluir empregado.");
 			System.out.println("Erro: " + e.getMessage());
@@ -64,13 +65,13 @@ public class VendedorDAO implements BaseDAO<Vendedor> {
 			Banco.closePreparedStatement(prepStmt);
 			Banco.closeConnection(conexao);
 		}
-		
+
 		return sucessoDelete;
 	}
 
 	public boolean alterar(Vendedor novoVendedor) {
 		boolean sucessoUpdate = false;
-		
+
 		Connection conexao = Banco.getConnection();
 		String sql = " UPDATE VENDEDOR"
 				+ " SET NOME=?, SEXO=?, CPF=?, CONTATO=?, COMISSAO=? "
@@ -84,35 +85,35 @@ public class VendedorDAO implements BaseDAO<Vendedor> {
 			prepStmt.setString(4, novoVendedor.getCelular());
 			prepStmt.setDouble(5, novoVendedor.getComissao());
 			registrosAlterados = prepStmt.executeUpdate();
-			
+
 			if (registrosAlterados == 1) {
 				sucessoUpdate = true;
 			}
-			
+
 		} catch (SQLException e) {
 			System.out.println("Erro ao atualizar o vendedor. Causa: " + e.getMessage());
 		} finally {
 			Banco.closePreparedStatement(prepStmt);
 			Banco.closeConnection(conexao);
 		}
-		
+
 		return sucessoUpdate;
 	}
 
 	public Vendedor consultarPorId(int id) {
 		String sql = "SELECT * FROM VENDEDOR " + "WHERE ID=?";
-		
+
 		Connection conexao = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql);
 		Vendedor v = null;
-		
+
 		try {
 			prepStmt.setInt(1, id);
 			ResultSet result = prepStmt.executeQuery();
-			
+
 			while (result.next()) {
 				v = new Vendedor();
-				
+
 				v.setId(result.getInt("ID"));
 				v.setNome(result.getString("NOME"));
 				v.setSexo(result.getString("SEXO"));
@@ -123,7 +124,7 @@ public class VendedorDAO implements BaseDAO<Vendedor> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-				
+
 		return v;
 	}
 
@@ -131,7 +132,7 @@ public class VendedorDAO implements BaseDAO<Vendedor> {
 		Connection conexao = Banco.getConnection();
 		String sql = " SELECT * FROM CLIENTE ";
 		PreparedStatement stmt = Banco.getPreparedStatement(conexao, sql);
-		
+
 		ArrayList<Vendedor> vendedores = new ArrayList<Vendedor>();
 		try {
 			ResultSet rs = stmt.executeQuery();
@@ -143,13 +144,13 @@ public class VendedorDAO implements BaseDAO<Vendedor> {
 			System.out.println("Erro ao consultar vendedores.");
 			System.out.println("Erro: " + e.getMessage());
 		}
-		
+
 		return vendedores;
 	}
 
 	private Vendedor construirVendedorDoResultSet(ResultSet result) {
 		Vendedor v = new Vendedor();
-		
+
 		try {
 			v.setId(result.getInt("ID"));
 			v.setNome(result.getString("NOME"));
@@ -162,7 +163,7 @@ public class VendedorDAO implements BaseDAO<Vendedor> {
 		}
 		return v;
 	}
-	
-	
+
+
 
 }

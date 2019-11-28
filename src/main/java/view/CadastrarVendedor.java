@@ -5,9 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -51,7 +53,8 @@ public class CadastrarVendedor extends JPanel {
 		JLabel lblSexo = new JLabel("Sexo:");
 		lblSexo.setBounds(49, 104, 61, 16);
 		add(lblSexo);
-		
+
+
 		final JRadioButton rbSexFem = new JRadioButton("F");
 		rbSexFem.setBounds(152, 101, 42, 23);
 		add(rbSexFem);
@@ -60,32 +63,37 @@ public class CadastrarVendedor extends JPanel {
 		rbSexMas.setBounds(206, 101, 50, 23);
 		add(rbSexMas);
 
+		ButtonGroup radioButtonGroupSexo = new ButtonGroup();
+		radioButtonGroupSexo.add(rbSexMas);
+		radioButtonGroupSexo.add(rbSexFem);
+
 		JButton btnSalvarVendedor = new JButton("Salvar");
 		btnSalvarVendedor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ControllerVendedor controllerVendedor = new ControllerVendedor();
-				
-			String nome = txtNome.getText();
-			String cpf = txtCPF.getText();
-			String telefone = txtTel.getText();
-			String comissao = txtComissao.getText(); 
-			String sexo = " ";
-			
-			if (rbSexFem.isSelected()) {
-				sexo = "F";
-			}
-			
-			if (rbSexMas.isSelected()) {
-				sexo = "M";
-			}
-			
-			String mensagem = controllerVendedor.validarCamposSalvar(nome,cpf, telefone, comissao, sexo);
-			
-			if (mensagem.isEmpty()) {
-				novoVendedor = new Vendedor(0, nome, cpf, telefone, sexo, Double.valueOf(comissao));
-				novoVendedor = controllerVendedor.salvar(novoVendedor);
-			};
-		}});
+
+				String nome = txtNome.getText();
+				String cpf = (String) txtCPF.getValue();
+				String telefone = txtTel.getText();
+				String comissao = txtComissao.getText(); 
+				String sexo = " ";
+
+				if (rbSexFem.isSelected()) {
+					sexo = "F";
+				}
+
+				if (rbSexMas.isSelected()) {
+					sexo = "M";
+				}
+
+				String mensagem = controllerVendedor.validarCamposSalvar(nome,cpf, telefone, comissao, sexo);
+				if (mensagem.isEmpty()) {
+					novoVendedor = new Vendedor(0, nome, cpf, telefone, sexo, Double.valueOf(comissao));
+					novoVendedor = controllerVendedor.salvar(novoVendedor);
+				}else {
+					JOptionPane.showMessageDialog(null, mensagem, "Atenção", JOptionPane.WARNING_MESSAGE);
+				}
+			}});
 
 		btnSalvarVendedor.setBounds(152, 212, 117, 29);
 		add(btnSalvarVendedor);
@@ -106,10 +114,14 @@ public class CadastrarVendedor extends JPanel {
 		MaskFormatter mascaraCpf1;
 		try {
 			mascaraCpf1 = new MaskFormatter("###.###.###-##");
+			mascaraCpf1.setValueContainsLiteralCharacters(false);
+			mascaraCpf1.setOverwriteMode(true);
 			txtCPF = new JFormattedTextField(mascaraCpf1);
+			mascaraCpf1.setValidCharacters("0123456789");
 		} catch (ParseException e) {
 		}
 		txtCPF.setBounds(152, 71, 134, 26);
+		
 		add(txtCPF);
 
 		MaskFormatter mascaraTel1;
@@ -122,7 +134,7 @@ public class CadastrarVendedor extends JPanel {
 		txtTel.setBounds(152, 132, 134, 26);
 		add(txtTel);
 
-		
+
 
 	}
 }
