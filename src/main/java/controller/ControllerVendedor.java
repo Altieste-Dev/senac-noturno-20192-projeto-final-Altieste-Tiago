@@ -5,7 +5,7 @@ import model.entity.Vendedor;
 
 public class ControllerVendedor {
 
-	public String validarCamposSalvar(String nome, String cpf, String telefone, String comissao, String sexo) {
+	public String validarCamposSalvar(String nome, String sexo, String cpf, String telefone, String comissao) {
 		String mensagem = "";
 		
 		if (nome.isEmpty() || nome.trim().length() < 3) {

@@ -73,10 +73,11 @@ public class CadastrarVendedor extends JPanel {
 				ControllerVendedor controllerVendedor = new ControllerVendedor();
 
 				String nome = txtNome.getText();
-				String cpf = (String) txtCPF.getValue();
-				String telefone = txtTel.getText();
-				String comissao = txtComissao.getText(); 
 				String sexo = " ";
+				String cpf = (String) txtCPF.getValue();
+				String celular = txtTel.getText();
+				String comissao = txtComissao.getText(); 
+				
 
 				if (rbSexFem.isSelected()) {
 					sexo = "F";
@@ -86,9 +87,9 @@ public class CadastrarVendedor extends JPanel {
 					sexo = "M";
 				}
 
-				String mensagem = controllerVendedor.validarCamposSalvar(nome,cpf, telefone, comissao, sexo);
+				String mensagem = controllerVendedor.validarCamposSalvar(nome, sexo, cpf, celular, comissao);
 				if (mensagem.isEmpty()) {
-					novoVendedor = new Vendedor(0, nome, cpf, telefone, sexo, Double.valueOf(comissao));
+					novoVendedor = new Vendedor(0, nome, sexo, cpf, celular, Double.valueOf(comissao));
 					novoVendedor = controllerVendedor.salvar(novoVendedor);
 				}else {
 					JOptionPane.showMessageDialog(null, mensagem, "Atenção", JOptionPane.WARNING_MESSAGE);
