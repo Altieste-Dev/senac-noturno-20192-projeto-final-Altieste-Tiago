@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
 
-import controller.ClienteController;
+import controller.ControllerCliente;
 import model.entity.Cliente;
 //import net.miginfocom.swing.MigLayout;
 
@@ -33,8 +33,8 @@ public class CadastrarCliente extends JPanel {
 	 * Create the panel.
 	 */
 	public CadastrarCliente() {
-	//setLayout(new MigLayout("", "[122px,fill][24px,fill][45px][12px][235px]",
-		//		"[16px][26px][26px][23px][26px][26px][29px]"));
+		// setLayout(new MigLayout("", "[122px,fill][24px,fill][45px][12px][235px]",
+		// "[16px][26px][26px][23px][26px][26px][29px]"));
 
 		nomecliente = new JTextField();
 		add(nomecliente, "cell 2 1 3 1,alignx left,aligny top");
@@ -65,7 +65,7 @@ public class CadastrarCliente extends JPanel {
 		JButton btnSalvarCliente = new JButton("Salvar");
 		btnSalvarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ClienteController cliController = new ClienteController();
+				ControllerCliente cliController = new ControllerCliente();
 				Cliente cliente = new Cliente();
 				cliente.setNome(nomecliente.getText());
 				cliente.setCpf(txtCpf.getText());
