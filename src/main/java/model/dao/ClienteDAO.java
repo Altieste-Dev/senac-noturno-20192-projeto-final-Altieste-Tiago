@@ -72,22 +72,65 @@ public class ClienteDAO implements BaseDAO<Cliente>{
 	}
 
 	
+	public boolean alterar(Cliente cliente) {
+		boolean sucessoUpdate = false;
+		
+		Connection conn = Banco.getConnection();
+		String sql = " UPDATE CLIENTE" 
+				+ "SET NOME=?, SEXO=?,CPF=?, TEL_RESIDENCIAL=?, TEL_CELULAR=?"
+				+ "DATA_NASCIMENTO=? "
+				+ "WHERE ID = ?";
+		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, sql);
+		int registrosAlterados =0;
+		try {
+			prepStmt.setString(1, cliente.getNome());
+			prepStmt.setString(2, cliente.getSexo());
+			prepStmt.setString(3, cliente.getCpf());
+			prepStmt.setString(4, cliente.getResidencial());
+			prepStmt.setString(5, cliente.getCelular());
+			prepStmt.setDate(6, cliente.getDataNascimento());
+			registrosAlterados = prepStmt.executeUpdate();
+			
+			if (registrosAlterados == 1) {
+				sucessoUpdate = true;
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro ao atualizar o vendedor. Causa: " + e.getMessage());
+		} finally {
+			Banco.closePreparedStatement(prepStmt);
+			Banco.closeConnection(conn);
+		}
+		
+		return sucessoUpdate;
+	}
+
+
 	public ArrayList consultarTodos() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-
-	public boolean alterar(Cliente entidade) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
+	
 
 	public Cliente consultarPorId(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	private Cliente construirClienteDoResultSet (ResultSet result) {
+		Cliente c = new Cliente();
+		
+		try {
+			c.setId(result.getInt("ID"));
+			c.setNome(result.getString("NOME"));
+			c.setSexo(result.getString("SEXO"));
+			c.setCpf(result.getString("CPF"));
+			c.setResidencial(result.getString("TEL_RESIDENCIAL"));
+			c.setCelular(result.getString("TEL_CELULAR"));
+			c.setDataNascimento(result.getDate("DATA_NASCIMENTO"));
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return c;
+	}
 }

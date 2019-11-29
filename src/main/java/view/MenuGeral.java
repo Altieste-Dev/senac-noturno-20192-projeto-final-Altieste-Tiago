@@ -31,6 +31,7 @@ public class MenuGeral extends JFrame {
 		});
 	}
 
+	// tela funcionando
 	public MenuGeral() {
 		Dimension dimensoesTela = Toolkit.getDefaultToolkit().getScreenSize();
 		larguraDosPaineis = (int) ((dimensoesTela.getWidth() - 20));
