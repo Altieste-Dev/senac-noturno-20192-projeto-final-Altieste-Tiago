@@ -105,15 +105,54 @@ public class ClienteDAO implements BaseDAO<Cliente>{
 	}
 
 
-	public ArrayList consultarTodos() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Cliente> consultarTodos() {
+		Connection conn = Banco.getConnection();
+		String sql = "SELECT * FROM CLIENTE ";
+		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, sql);
+		
+		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+		try {
+			ResultSet rs = prepStmt.executeQuery();
+			while(rs.next()) {
+				Cliente c = construirClienteDoResultSet(rs);
+				clientes.add(c);
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro ao consultar clientes.");
+			System.out.println("Erro: " + e.getMessage());
+		}
+		
+				
+		return clientes;
 	}
 	
 
 	public Cliente consultarPorId(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "SELECT * FROM CLIENTE " + "WHERE ID=?";
+		Connection conn = Banco.getConnection();
+		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, sql);
+		Cliente c = null;
+		
+		try {
+			prepStmt.setInt(1, id);
+			ResultSet result = prepStmt.executeQuery();
+			
+			while (result.next()) {
+			c = new Cliente();
+			
+			c.setId(result.getInt("ID"));
+			c.setNome(result.getString("NOME"));
+			c.setSexo(result.getString("SEXO"));
+			c.setCpf(result.getString("CPF"));
+			c.setResidencial(result.getString("TEL_RESIDENCIAL"));
+			c.setCelular(result.getString("TEL_CELULAR"));
+			c.setDataNascimento(result.getDate("DATA_NASCIMENTO"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return c;
 	}
 
 	private Cliente construirClienteDoResultSet (ResultSet result) {
