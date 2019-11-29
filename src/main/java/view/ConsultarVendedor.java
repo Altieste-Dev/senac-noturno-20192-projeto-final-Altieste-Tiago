@@ -26,9 +26,6 @@ public class ConsultarVendedor extends JPanel {
 	private JTextField textComissao;
 	private Vendedor novoVendedor;
 
-	/**
-	 * Create the panel.
-	 */
 	public ConsultarVendedor() {
 		setLayout(new MigLayout("", "[][grow][][]", "[][][][][][][][][]"));
 
@@ -80,7 +77,6 @@ public class ConsultarVendedor extends JPanel {
 		JLabel lblComisso = new JLabel("Comissão:");
 		add(lblComisso, "cell 0 6,alignx trailing");
 
-		ButtonGroup radioButtonGroupSexo = new ButtonGroup();
 		final JRadioButton rbSexFem = new JRadioButton("F");
 		rbSexFem.setBounds(152, 101, 42, 23);
 		add(rbSexFem, "flowx,cell 1 4");
@@ -88,7 +84,10 @@ public class ConsultarVendedor extends JPanel {
 		final JRadioButton rbSexMas = new JRadioButton("M");
 		rbSexMas.setBounds(206, 101, 50, 23);
 		add(rbSexMas, "cell 1 4");
-		radioButtonGroupSexo.add(rbSexMas);
+
+		ButtonGroup radioGroupSexo = new ButtonGroup();
+		radioGroupSexo.add(rbSexMas);
+		radioGroupSexo.add(rbSexFem);
 
 		textComissao = new JTextField();
 		add(textComissao, "cell 1 6,growx");

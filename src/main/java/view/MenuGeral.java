@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -38,17 +39,19 @@ public class MenuGeral extends JFrame {
 		alturaDaTela = (int) (dimensoesTela.getHeight() - 10);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 593, 369);
 
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		setJMenuBar(menuBar);
 
 		JMenu mnVendedor = new JMenu("Vendedor");
+		mnVendedor.setIcon(new ImageIcon(MenuGeral.class.getResource("/icons/icons8-businessman-48.png")));
 		mnVendedor.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		menuBar.add(mnVendedor);
 
 		JMenuItem mntmCadastrar = new JMenuItem("Cadastrar");
+		mntmCadastrar.setIcon(new ImageIcon(MenuGeral.class.getResource("/icons/icons8-attitude-48.png")));
 		mntmCadastrar.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -62,10 +65,26 @@ public class MenuGeral extends JFrame {
 		});
 		mnVendedor.add(mntmCadastrar);
 
+		JMenuItem mntmConsultarVendedor = new JMenuItem("Consultar");
+		mntmConsultarVendedor.setIcon(new ImageIcon(MenuGeral.class.getResource("/icons/icons8-decision-48.png")));
+		mntmConsultarVendedor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ConsultarVendedor painelCconsultarVendedor = new ConsultarVendedor();
+				painelCconsultarVendedor.setBounds(0, 0, larguraDosPaineis, alturaDaTela);
+				setContentPane(painelCconsultarVendedor);
+				revalidate();
+
+			}
+		});
+		mnVendedor.add(mntmConsultarVendedor);
+
 		JMenu mnCliente = new JMenu("Cliente");
+		mnCliente.setIcon(new ImageIcon(MenuGeral.class.getResource("/icons/icons8-consultation-48.png")));
 		menuBar.add(mnCliente);
 
 		JMenuItem mntmCadastrar_2 = new JMenuItem("Cadastrar");
+		mntmCadastrar_2
+				.setIcon(new ImageIcon(MenuGeral.class.getResource("/icons/icons8-add-user-male-skin-type-7-48.png")));
 		mntmCadastrar_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CadastrarCliente painelCadastroCliente = new CadastrarCliente();
@@ -77,6 +96,7 @@ public class MenuGeral extends JFrame {
 		mnCliente.add(mntmCadastrar_2);
 
 		JMenuItem mntmConsultar_1 = new JMenuItem("Consultar");
+		mntmConsultar_1.setIcon(new ImageIcon(MenuGeral.class.getResource("/icons/icons8-find-user-male-48.png")));
 		mntmConsultar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ConsultarCliente painelConsultaCliente = new ConsultarCliente();
@@ -87,10 +107,12 @@ public class MenuGeral extends JFrame {
 		});
 		mnCliente.add(mntmConsultar_1);
 
-		JMenu mnVeculos = new JMenu("Veículos");
-		menuBar.add(mnVeculos);
+		JMenu mnVeiculos = new JMenu("Veiculos");
+		mnVeiculos.setIcon(new ImageIcon(MenuGeral.class.getResource("/icons/icons8-garage-48.png")));
+		menuBar.add(mnVeiculos);
 
 		JMenuItem mntmCadastrar_1 = new JMenuItem("Cadastrar");
+		mntmCadastrar_1.setIcon(new ImageIcon(MenuGeral.class.getResource("/icons/icons8-add-48.png")));
 		mntmCadastrar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CadastrarVeiculo painelCadastrarVeiculo = new CadastrarVeiculo();
@@ -99,9 +121,10 @@ public class MenuGeral extends JFrame {
 				revalidate();
 			}
 		});
-		mnVeculos.add(mntmCadastrar_1);
+		mnVeiculos.add(mntmCadastrar_1);
 
 		JMenuItem mntmConsultar = new JMenuItem("Consultar");
+		mntmConsultar.setIcon(new ImageIcon(MenuGeral.class.getResource("/icons/icons8-find-and-replace-48.png")));
 		mntmConsultar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ConsultarVeiculos painelConsultarVeiculo = new ConsultarVeiculos();
@@ -111,15 +134,18 @@ public class MenuGeral extends JFrame {
 
 			}
 		});
-		mnVeculos.add(mntmConsultar);
+		mnVeiculos.add(mntmConsultar);
 
-		JMenu mnRelatrio = new JMenu("Relatório");
+		JMenu mnRelatrio = new JMenu("Relatorio");
+		mnRelatrio.setIcon(new ImageIcon(MenuGeral.class.getResource("/icons/icons8-terms-and-conditions-48.png")));
 		menuBar.add(mnRelatrio);
 
 		JMenuItem mntmGerar = new JMenuItem("Gerar");
+		mntmGerar.setIcon(new ImageIcon(MenuGeral.class.getResource("/icons/icons8-answers-48.png")));
 		mnRelatrio.add(mntmGerar);
 
 		JMenu mnSobre = new JMenu("Sobre");
+		mnSobre.setIcon(new ImageIcon(MenuGeral.class.getResource("/icons/icons8-about-48.png")));
 		menuBar.add(mnSobre);
 		getContentPane().setLayout(null);
 	}

@@ -17,6 +17,7 @@ import javax.swing.text.MaskFormatter;
 
 import controller.ControllerCliente;
 import model.entity.Cliente;
+import net.miginfocom.swing.MigLayout;
 //import net.miginfocom.swing.MigLayout;
 
 public class CadastrarCliente extends JPanel {
@@ -33,8 +34,8 @@ public class CadastrarCliente extends JPanel {
 	 * Create the panel.
 	 */
 	public CadastrarCliente() {
-		// setLayout(new MigLayout("", "[122px,fill][24px,fill][45px][12px][235px]",
-		// "[16px][26px][26px][23px][26px][26px][29px]"));
+		setLayout(new MigLayout("", "[122px,fill][24px,fill][45px][12px][235px]",
+				"[16px][26px][26px][23px][26px][26px][29px]"));
 
 		nomecliente = new JTextField();
 		add(nomecliente, "cell 2 1 3 1,alignx left,aligny top");
