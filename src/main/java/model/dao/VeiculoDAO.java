@@ -2,7 +2,9 @@ package model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import model.entity.Veiculo;
@@ -83,7 +85,45 @@ public class VeiculoDAO implements BaseDAO<Veiculo> {
 	}
 
 	public Veiculo consultarPorId(int id) {
-		// TODO Auto-generated method stub
+		Connection conn = Banco.getConnection();
+		String sql = "SELECT idEstoque, ano, cor, quilomentragem, placa, situacao, valorFIPE, Carro_idCarro"
+				+ "FROM ESTOQUE "
+				+ "WHERE ID= " + id;
+		
+				
+		Statement stmt = Banco.getStatement(conn);
+		Veiculo veiculo = null;
+		
+		try {
+			ResultSet resultadoDaConsulta = stmt.executeQuery(sql);
+			if(resultadoDaConsulta.next()) {
+				veiculo = construirVeiculoDoResultSet (resultadoDaConsulta);
+				
+			}
+		} catch (SQLException e) {
+			System.out.println("Erro ao consultar o veículo por id =" + id);
+			System.out.println("Erro: " + e.getMessage());
+		}
+		
+		return veiculo;
+	}
+
+	private Veiculo construirVeiculoDoResultSet(ResultSet resultadoDaConsulta) {
+		Veiculo novoVeiculo = null;
+		try {
+			novoVeiculo = new Veiculo();
+			novoVeiculo.setId(resultadoDaConsulta.getInt("id"));
+			novoVeiculo.setAno(resultadoDaConsulta.getInt("ano"));
+			novoVeiculo.setCor(resultadoDaConsulta.getString("cor"));
+			novoVeiculo.setQuilometragem(resultadoDaConsulta.getDouble("quilometragem"));
+			novoVeiculo.setPlaca(resultadoDaConsulta.getString("placa"));
+			novoVeiculo.setCor(resultadoDaConsulta.getString("situação"));
+			novoVeiculo.setCor(resultadoDaConsulta.getString("valorFIPE"));
+			novoVeiculo.setModelo(resultadoDaConsulta.getModelo.getInt("Carro_idCarro"));
+		} catch (SQLException e) {
+			System.out.println("Erro ao construir veículo a partir do ResultSet");
+			System.out.println("Erro: " + e.getMessage());
+		}
 		return null;
 	}
 

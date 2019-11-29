@@ -2,6 +2,7 @@ package model.entity;
 
 public class Veiculo {
 	
+	int id;
 	int ano;
 	String cor;
 	double quilometragem;
@@ -11,9 +12,10 @@ public class Veiculo {
 	Modelo modelo;
 	
 	
-	public Veiculo(int ano, String cor, double quilometragem, String placa, 
+	public Veiculo(int id, int ano, String cor, double quilometragem, String placa, 
 			String situacao, double valorFIPE, Modelo modelo) {
 		super();
+		this.id = id;
 		this.ano = ano;
 		this.cor = cor;
 		this.quilometragem = quilometragem;
@@ -27,6 +29,16 @@ public class Veiculo {
 	public Veiculo() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 
