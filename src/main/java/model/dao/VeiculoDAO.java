@@ -7,18 +7,46 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import model.entity.Modelo;
 import model.entity.Veiculo;
 
 public class VeiculoDAO implements BaseDAO<Veiculo> {
 
 	public boolean excluir(int id) {
-		// TODO Auto-generated method stub
-		return false;
+		Connection conn = Banco.getConnection();
+		String sql = "DELETE FROM ESTOQUE WHERE ID= " + id;
+		Statement stmt = Banco.getStatement(conn);
+		
+		int quantidadeLinhasAfetadas = 0;
+		try {
+			quantidadeLinhasAfetadas = stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			System.out.println("Erro ao excluir cliente.");
+			System.out.println("Erro: " + e.getMessage());
+		}
+		
+		return quantidadeLinhasAfetadas > 0;
 	}
 
-	public ArrayList consultarTodos() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Veiculo> consultarTodos() {
+		Connection conn = Banco.getConnection();
+		String sql = "SELECT * FROM CLIENTE ";
+		PreparedStatement prepStmt = Banco.getPreparedStatement(conn, sql);
+		
+		ArrayList<Veiculo> veiculos = new ArrayList<Veiculo>();
+		try {
+			ResultSet rs = prepStmt.executeQuery();
+			while(rs.next()) {
+				Veiculo v = construirVeiculoDoResultSet(rs);
+				veiculos.add(v);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("Erro ao consultar clientes.");
+			System.out.println("Erro: " + e.getMessage());
+		}
+		
+		return veiculos;
 	}
 
 	public Veiculo salvar(Veiculo novoVeiculo) {
@@ -119,12 +147,17 @@ public class VeiculoDAO implements BaseDAO<Veiculo> {
 			novoVeiculo.setPlaca(resultadoDaConsulta.getString("placa"));
 			novoVeiculo.setCor(resultadoDaConsulta.getString("situação"));
 			novoVeiculo.setCor(resultadoDaConsulta.getString("valorFIPE"));
-			novoVeiculo.setModelo(resultadoDaConsulta.getModelo.getInt("Carro_idCarro"));
+			
+			ModeloDAO modeloDAO = new ModeloDAO();
+			Modelo modelo = modeloDAO.consultarPorId(resultadoDaConsulta.getInt("idcarro"));
+			
+			novoVeiculo.setModelo(modelo);
+			
 		} catch (SQLException e) {
 			System.out.println("Erro ao construir veículo a partir do ResultSet");
 			System.out.println("Erro: " + e.getMessage());
 		}
-		return null;
+		return novoVeiculo;
 	}
 
 }

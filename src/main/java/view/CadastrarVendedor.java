@@ -75,7 +75,7 @@ public class CadastrarVendedor extends JPanel {
 				String nome = txtNome.getText();
 				String sexo = " ";
 				String cpf = (String) txtCPF.getValue();
-				String celular = txtTel.getText();
+				String celular = (String) txtTel.getValue();
 				String comissao = txtComissao.getText(); 
 				
 
@@ -128,7 +128,11 @@ public class CadastrarVendedor extends JPanel {
 		MaskFormatter mascaraTel1;
 		try {
 			mascaraTel1 = new MaskFormatter("(##) #####-####");
+			mascaraTel1.setValueContainsLiteralCharacters(false);
+			mascaraTel1.setOverwriteMode(true);
 			txtTel = new JFormattedTextField(mascaraTel1);
+			mascaraTel1.setValidCharacters("0123456789");
+			
 		} catch (ParseException e) {
 		}
 
