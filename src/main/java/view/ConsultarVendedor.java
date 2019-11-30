@@ -3,6 +3,7 @@ package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -25,15 +26,27 @@ public class ConsultarVendedor extends JPanel {
 	private JTextField textTel;
 	private JTextField textComissao;
 	private Vendedor novoVendedor;
-
+	JComboBox<Vendedor> comboVendedor;
+	ControllerVendedor conVendedor;
+	
 	public ConsultarVendedor() {
 		setLayout(new MigLayout("", "[][grow][][]", "[][][][][][][][][]"));
 
 		JLabel lblNome = new JLabel("Vendedor:");
 		add(lblNome, "cell 0 0,alignx trailing");
 
-		JComboBox comboVendedor = new JComboBox();
+		ArrayList<Vendedor> vendedores = new ArrayList<Vendedor>();
+		conVendedor = new ControllerVendedor();
+		
+		comboVendedor = new JComboBox();
 		add(comboVendedor, "cell 1 0,growx");
+				
+		vendedores = conVendedor.consultarTodosVendedores();
+		for (Vendedor user : vendedores) {
+			comboVendedor.addItem(user);
+			
+		}
+		
 
 		JLabel lblNome_1 = new JLabel("Nome:");
 		add(lblNome_1, "cell 0 2,alignx trailing");

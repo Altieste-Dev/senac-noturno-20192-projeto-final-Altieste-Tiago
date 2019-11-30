@@ -2,9 +2,11 @@ package model.dao;
 
 import java.util.ArrayList;
 
-public class VendasDAO implements BaseDAO {
+import model.entity.Vendas;
 
-	public Object salvar(Object novaEntidade) {
+public class VendasDAO implements BaseDAO<Vendas> {
+
+	public Vendas salvar(Vendas novaEntidade) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -14,12 +16,12 @@ public class VendasDAO implements BaseDAO {
 		return false;
 	}
 
-	public boolean alterar(Object entidade) {
+	public boolean alterar(Vendas entidade) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	public Object consultarPorId(int id) {
+	public Vendas consultarPorId(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

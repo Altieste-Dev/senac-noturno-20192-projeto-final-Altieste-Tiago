@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.ArrayList;
+
 import model.bo.VendedorBO;
 import model.entity.Vendedor;
 
@@ -35,6 +37,11 @@ public class ControllerVendedor {
 	public Vendedor salvar(Vendedor novoVendedor) {
 		VendedorBO bo = new VendedorBO();
 		return bo.salvar(novoVendedor);
+	}
+
+	public ArrayList<Vendedor> consultarTodosVendedores() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
