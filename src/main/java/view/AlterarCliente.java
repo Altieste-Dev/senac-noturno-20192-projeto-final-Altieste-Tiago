@@ -20,6 +20,8 @@ import model.entity.Cliente;
 import net.miginfocom.swing.MigLayout;
 
 public class AlterarCliente extends JPanel {
+	
+	//Alti
 	protected static final String SEXO_MASCULINO = "M";
 	protected static final String SEXO_FEMININO = "F";
 	private JTextField nomecliente;
