@@ -8,7 +8,7 @@ public class Vendedor {
 	private String celular;
 	private Double comissao;
 	
-	public Vendedor(int id, String nome, String sexo, String cpf, String celular, Double comissao) {
+	public Vendedor( int id, String nome, String sexo, String cpf, String celular, Double comissao) {
 		super();
 		this.nome = nome;
 		this.sexo = sexo;
@@ -22,11 +22,11 @@ public class Vendedor {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public int getid() {
+	public int getId() {
 		return id;
 	}
-	
-	public void setid(int id) {
+
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -70,13 +70,15 @@ public class Vendedor {
 		this.comissao = comissao;
 	}
 
-	public int getId() {
-		return id;
+	@Override
+	public String toString() {
+		String nome = this.nome;
+		
+		return "Nome: " + nome;
+
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
+	
 
 	
 	

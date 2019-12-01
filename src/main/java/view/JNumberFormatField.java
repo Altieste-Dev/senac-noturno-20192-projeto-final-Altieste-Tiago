@@ -24,6 +24,8 @@ import javax.swing.text.PlainDocument;
  *         https://www.guj.com.br/t/mascara-para-jtextfield-valor-real/85762/2
  */
 public class JNumberFormatField extends JTextField {
+	//Alti
+
 	private static final long serialVersionUID = -7506506392528621022L;
 	private static final NumberFormat MONETARY_FORMAT = new DecimalFormat("R$ #,##0.00");
 	private NumberFormat numberFormat;

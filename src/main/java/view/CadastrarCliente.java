@@ -19,6 +19,8 @@ import controller.ControllerCliente;
 import model.entity.Cliente;
 import net.miginfocom.swing.MigLayout;
 //import net.miginfocom.swing.MigLayout;
+//Alti
+
 
 public class CadastrarCliente extends JPanel {
 	protected static final String SEXO_MASCULINO = "M";

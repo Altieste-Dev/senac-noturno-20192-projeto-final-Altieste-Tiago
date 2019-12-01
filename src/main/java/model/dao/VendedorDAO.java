@@ -20,7 +20,7 @@ public class VendedorDAO implements BaseDAO<Vendedor> {
 		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
 		try {
-			//stmt.setInt(0, novoVendedor.getid());
+			stmt.setInt(0, novoVendedor.getId());
 			stmt.setString(1, novoVendedor.getNome());
 			stmt.setString(2, novoVendedor.getSexo());
 			stmt.setString(3, novoVendedor.getCpf());
@@ -99,9 +99,44 @@ public class VendedorDAO implements BaseDAO<Vendedor> {
 
 		return sucessoUpdate;
 	}
+	
+//	public Vendedor consultarPorId(int id) {
+//		String sql = " SELECT * FROM VENDEDOR " + "WHERE IDVENDEROR = " + id;
+//		Connection conn = Banco.getConnection();
+//		Statement stmt = Banco.getStatement(conn);
+//		
+//		Vendedor v = null;
+//		ResultSet rs = null;
+//		
+//		try {
+//			
+//			rs = stmt.executeQuery(sql);
+//
+//			while (rs.next()) {
+//				v = new Vendedor();
+//
+//				v.setIdVendedor(rs.getInt("IDVENDEDOR"));
+//				v.setNome(rs.getString("NOME"));
+//				v.setSexo(rs.getString("SEXO"));
+//				v.setCpf(rs.getString("CPF"));
+//				v.setCelular(rs.getString("CONTATO"));
+//				v.setComissao(rs.getDouble("COMISSAO"));
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally { 
+//			Banco.closeResultSet(rs);
+//			Banco.closePreparedStatement(stmt);
+//			Banco.closeConnection(conn);
+//		}
+//		
+//		
+//		return v;
+//				
+//	}
 
 	public Vendedor consultarPorId(int id) {
-		String sql = "SELECT * FROM VENDEDOR " + "WHERE ID=?";
+		String sql = "SELECT * FROM VENDEDOR " + "WHERE id=?";
 
 		Connection conexao = Banco.getConnection();
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql);
@@ -114,7 +149,7 @@ public class VendedorDAO implements BaseDAO<Vendedor> {
 			while (result.next()) {
 				v = new Vendedor();
 
-				v.setId(result.getInt("ID"));
+				v.setId(result.getInt("id"));
 				v.setNome(result.getString("NOME"));
 				v.setSexo(result.getString("SEXO"));
 				v.setCpf(result.getString("CPF"));
@@ -130,7 +165,7 @@ public class VendedorDAO implements BaseDAO<Vendedor> {
 
 	public ArrayList<Vendedor> consultarTodos() {
 		Connection conexao = Banco.getConnection();
-		String sql = " SELECT * FROM CLIENTE ";
+		String sql = " SELECT IDVENDEDOR, NOME, SEXO, CPF, CONTATO, COMISSAO FROM VENDEDOR";
 		PreparedStatement stmt = Banco.getPreparedStatement(conexao, sql);
 
 		ArrayList<Vendedor> vendedores = new ArrayList<Vendedor>();
@@ -147,12 +182,12 @@ public class VendedorDAO implements BaseDAO<Vendedor> {
 
 		return vendedores;
 	}
-
+	
 	private Vendedor construirVendedorDoResultSet(ResultSet result) {
 		Vendedor v = new Vendedor();
 
 		try {
-			v.setId(result.getInt("ID"));
+		//	v.setId(result.getInt("ID"));
 			v.setNome(result.getString("NOME"));
 			v.setSexo(result.getString("SEXO"));
 			v.setCpf(result.getString("CPF"));

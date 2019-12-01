@@ -9,6 +9,8 @@ import javax.swing.JTextField;
 import net.miginfocom.swing.MigLayout;
 
 public class VendaVeiculos extends JPanel {
+	//Alti
+
 	private JTextField textVeicSelec;
 	JNumberFormatField formattedValorFinal;
 	private JPanel contentPane;

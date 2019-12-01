@@ -2,6 +2,8 @@ package model.entity;
 
 import java.time.LocalDate;
 
+import com.google.protobuf.TextFormat.ParseException;
+
 public class Vendas {
 	
 	Cliente cliente;
@@ -12,13 +14,24 @@ public class Vendas {
 	LocalDate dataDaVenda;
 	
 	
-	public Vendas(Cliente cliente, Vendedor vendedor, Modelo modelo, Veiculo veiculo, Double precoDeVenda) {
+	public Vendas(Cliente cliente, Vendedor vendedor, Modelo modelo, Veiculo veiculo, Double precoDeVenda, LocalDate dataDaVenda) {
 		super();
 		this.cliente = cliente;
 		this.vendedor = vendedor;
 		this.modelo = modelo;
 		this.veiculo = veiculo;
 		this.precoDeVenda = precoDeVenda;
+		this.dataDaVenda = dataDaVenda;
+	}
+
+
+	public LocalDate getDataDaVenda() {
+		return dataDaVenda;
+	}
+
+
+	public void setDataDaVenda(LocalDate dataDaVenda) {
+		this.dataDaVenda = dataDaVenda;
 	}
 
 

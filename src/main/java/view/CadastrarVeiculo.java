@@ -14,6 +14,8 @@ import javax.swing.text.MaskFormatter;
 import net.miginfocom.swing.MigLayout;
 
 public class CadastrarVeiculo extends JPanel {
+	//Alti
+
 	JFormattedTextField formattedTexPlaca;
 
 	/**

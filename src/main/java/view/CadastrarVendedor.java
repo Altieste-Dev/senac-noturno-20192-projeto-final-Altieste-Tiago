@@ -20,6 +20,8 @@ import controller.ControllerVendedor;
 import model.entity.Vendedor;
 
 public class CadastrarVendedor extends JPanel {
+	//Alti
+
 	private JTextField txtNome;
 	private JTextField txtComissao;
 	JFormattedTextField txtCPF;

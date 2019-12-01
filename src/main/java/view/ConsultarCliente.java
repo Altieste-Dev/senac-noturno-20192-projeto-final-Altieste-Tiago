@@ -17,6 +17,8 @@ import javax.swing.text.MaskFormatter;
 import net.miginfocom.swing.MigLayout;
 
 public class ConsultarCliente extends JPanel {
+	//Alti
+
 	private JTable table;
 	private JTextField nomeconsultacliente;
 	JFormattedTextField formattedCpf;

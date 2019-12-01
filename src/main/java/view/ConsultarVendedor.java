@@ -21,6 +21,8 @@ import model.entity.Vendedor;
 import net.miginfocom.swing.MigLayout;
 
 public class ConsultarVendedor extends JPanel {
+	//Alti
+
 	private JTextField textNome;
 	private JTextField textCPF;
 	private JTextField textTel;
@@ -36,9 +38,10 @@ public class ConsultarVendedor extends JPanel {
 		add(lblNome, "cell 0 0,alignx trailing");
 
 		ArrayList<Vendedor> vendedores = new ArrayList<Vendedor>();
+	
 		conVendedor = new ControllerVendedor();
 		
-		comboVendedor = new JComboBox();
+		comboVendedor = new JComboBox(vendedores.toArray());
 		add(comboVendedor, "cell 1 0,growx");
 				
 		vendedores = conVendedor.consultarTodosVendedores();

@@ -14,6 +14,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 public class MenuGeral extends JFrame {
+	//Alti
+
 
 	private int larguraDosPaineis;
 	private int alturaDaTela;

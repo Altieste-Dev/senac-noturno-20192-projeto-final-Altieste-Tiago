@@ -40,8 +40,7 @@ public class ControllerVendedor {
 	}
 
 	public ArrayList<Vendedor> consultarTodosVendedores() {
-		// TODO Auto-generated method stub
-		return null;
+		VendedorBO vendedorBO = new VendedorBO();
+		return vendedorBO.consultarTodosVendedores();
 	}
-
 }

@@ -14,6 +14,8 @@ import javax.swing.JTable;
 import net.miginfocom.swing.MigLayout;
 
 public class ConsultarVeiculos extends JPanel {
+	//Alti
+
 	private JTable table;
 
 	/**
