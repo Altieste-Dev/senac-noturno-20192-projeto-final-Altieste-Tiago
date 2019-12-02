@@ -24,8 +24,8 @@ public class ConsultarVendedor extends JPanel {
 	//Alti
 
 	private JTextField textNome;
-	private JTextField textCPF;
-	private JTextField textTel;
+	private JFormattedTextField textCPF;
+	private JFormattedTextField textTel;
 	private JTextField textComissao;
 	private Vendedor novoVendedor;
 	JComboBox<Vendedor> comboVendedor;
@@ -61,7 +61,7 @@ public class ConsultarVendedor extends JPanel {
 		JLabel lblCpf = new JLabel("CPF:");
 		add(lblCpf, "cell 0 3,alignx trailing");
 
-		textCPF = new JTextField();
+		//textCPF = new JTextField();
 		MaskFormatter mascaraCpf1;
 		try {
 			mascaraCpf1 = new MaskFormatter("###.###.###-##");
@@ -80,11 +80,14 @@ public class ConsultarVendedor extends JPanel {
 		JLabel lblTelefone = new JLabel("Telefone:");
 		add(lblTelefone, "cell 0 5,alignx trailing");
 
-		textTel = new JTextField();
+	//	textTel = new JTextField();
 		MaskFormatter mascaraTel1;
 		try {
 			mascaraTel1 = new MaskFormatter("(##) #####-####");
 			textTel = new JFormattedTextField(mascaraTel1);
+			mascaraTel1.setValueContainsLiteralCharacters(false);
+			mascaraTel1.setOverwriteMode(true);
+			mascaraTel1.setValidCharacters("0123456789");
 		} catch (ParseException e) {
 		}
 		add(textTel, "cell 1 5,growx");
@@ -116,11 +119,11 @@ public class ConsultarVendedor extends JPanel {
 		btnAlterarVendedor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ControllerVendedor controllerVendedor = new ControllerVendedor();
-
+				
 				String nome = textNome.getText();
 				String sexo = " ";
-				String cpf = (String) textCPF.getText();
-				String celular = textTel.getText();
+				String cpf = (String) textCPF.getValue();
+				String celular = (String) textTel.getValue();
 				String comissao = textComissao.getText();
 
 				if (rbSexFem.isSelected()) {

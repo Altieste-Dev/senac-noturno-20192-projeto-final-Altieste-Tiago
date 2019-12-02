@@ -27,7 +27,7 @@ public class ControllerVendedor {
 		}
 		
 		if (sexo.isEmpty() || sexo.trim().length() < 1) {
-			mensagem += "Escolha o Sexo \n";
+			mensagem += "Selecione o Sexo \n";
 		}
 		
 		return mensagem;
@@ -43,4 +43,5 @@ public class ControllerVendedor {
 		VendedorBO vendedorBO = new VendedorBO();
 		return vendedorBO.consultarTodosVendedores();
 	}
+
 }

@@ -20,7 +20,7 @@ public class VendedorDAO implements BaseDAO<Vendedor> {
 		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql, PreparedStatement.RETURN_GENERATED_KEYS);
 
 		try {
-			stmt.setInt(0, novoVendedor.getId());
+			//stmt.setInt(0, novoVendedor.getId());
 			stmt.setString(1, novoVendedor.getNome());
 			stmt.setString(2, novoVendedor.getSexo());
 			stmt.setString(3, novoVendedor.getCpf());

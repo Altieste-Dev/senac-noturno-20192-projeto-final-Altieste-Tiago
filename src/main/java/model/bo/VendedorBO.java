@@ -22,4 +22,8 @@ public class VendedorBO {
 		}
 		return vendedoresVO;
 	}
+	
+	public boolean atualizarVendedor(Vendedor novoVendedor) {
+		return dao.alterar(novoVendedor);
+	}
 }
