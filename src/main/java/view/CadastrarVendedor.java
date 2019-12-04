@@ -91,7 +91,7 @@ public class CadastrarVendedor extends JPanel {
 
 				String mensagem = controllerVendedor.validarCamposSalvar(nome, sexo, cpf, celular, comissao);
 				if (mensagem.isEmpty()) {
-					novoVendedor = new Vendedor(0, nome, sexo, cpf, celular, Double.valueOf(comissao));
+					novoVendedor = new Vendedor(nome, sexo, cpf, celular, Double.valueOf(comissao));
 					novoVendedor = controllerVendedor.salvar(novoVendedor);
 				}else {
 					JOptionPane.showMessageDialog(null, mensagem, "Atenção", JOptionPane.WARNING_MESSAGE);

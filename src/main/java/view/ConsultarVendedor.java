@@ -19,6 +19,8 @@ import javax.swing.text.MaskFormatter;
 import controller.ControllerVendedor;
 import model.entity.Vendedor;
 import net.miginfocom.swing.MigLayout;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class ConsultarVendedor extends JPanel {
 	//Alti
@@ -28,8 +30,9 @@ public class ConsultarVendedor extends JPanel {
 	private JFormattedTextField textTel;
 	private JTextField textComissao;
 	private Vendedor novoVendedor;
-	JComboBox<Vendedor> comboVendedor;
-	ControllerVendedor conVendedor;
+	private JComboBox<Vendedor> cbVendedor;
+	private ControllerVendedor conVendedor;
+	private Vendedor vendedorSelecionado = new Vendedor();
 	
 	public ConsultarVendedor() {
 		setLayout(new MigLayout("", "[][grow][][]", "[][][][][][][][][]"));
@@ -38,19 +41,22 @@ public class ConsultarVendedor extends JPanel {
 		add(lblNome, "cell 0 0,alignx trailing");
 
 		ArrayList<Vendedor> vendedores = new ArrayList<Vendedor>();
-	
 		conVendedor = new ControllerVendedor();
-		
-		comboVendedor = new JComboBox(vendedores.toArray());
-		add(comboVendedor, "cell 1 0,growx");
-				
 		vendedores = conVendedor.consultarTodosVendedores();
-		for (Vendedor user : vendedores) {
-			comboVendedor.addItem(user);
-			
-		}
 		
-
+		cbVendedor = new JComboBox(vendedores.toArray());
+		cbVendedor.setSelectedIndex(-1);
+		
+		cbVendedor.setToolTipText("Escolha um vendedor da Lista de Vendedores Cadastrados");
+		
+		
+//		for (Vendedor user : vendedores) {
+//			cbVendedor.addItem(user);
+//			
+//		}
+		
+		add(cbVendedor, "cell 1 0,growx");
+				
 		JLabel lblNome_1 = new JLabel("Nome:");
 		add(lblNome_1, "cell 0 2,alignx trailing");
 
@@ -61,7 +67,6 @@ public class ConsultarVendedor extends JPanel {
 		JLabel lblCpf = new JLabel("CPF:");
 		add(lblCpf, "cell 0 3,alignx trailing");
 
-		//textCPF = new JTextField();
 		MaskFormatter mascaraCpf1;
 		try {
 			mascaraCpf1 = new MaskFormatter("###.###.###-##");
@@ -114,12 +119,37 @@ public class ConsultarVendedor extends JPanel {
 
 		JButton btnExcluir = new JButton("Excluir");
 		add(btnExcluir, "flowx,cell 1 8");
+		
+		cbVendedor.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				
+				
+				vendedorSelecionado = (Vendedor) cbVendedor.getSelectedItem();
+				
+				textNome.setText(vendedorSelecionado.getNome());
+				textCPF.setText(vendedorSelecionado.getCpf()); 
+				textTel.setText(vendedorSelecionado.getCelular()); 
+				textComissao.setText(vendedorSelecionado.getComissao().toString());
+				
+				String sexo = vendedorSelecionado.getSexo().toString();
+
+				if (sexo.equals("F")) {
+				rbSexFem.doClick();	
+				}
+				if (sexo.equals("M") ) {
+				rbSexMas.doClick();
+				}
+				
+			}
+		});
 
 		JButton btnAlterarVendedor = new JButton("Alterar");
 		btnAlterarVendedor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ControllerVendedor controllerVendedor = new ControllerVendedor();
+				vendedorSelecionado = (Vendedor) cbVendedor.getSelectedItem();	
 				
+				int id =  vendedorSelecionado.getId();
 				String nome = textNome.getText();
 				String sexo = " ";
 				String cpf = (String) textCPF.getValue();
@@ -136,8 +166,8 @@ public class ConsultarVendedor extends JPanel {
 
 				String mensagem = controllerVendedor.validarCamposSalvar(nome, sexo, cpf, celular, comissao);
 				if (mensagem.isEmpty()) {
-					novoVendedor = new Vendedor(0, nome, sexo, cpf, celular, Double.valueOf(comissao));
-					novoVendedor = controllerVendedor.salvar(novoVendedor);
+					novoVendedor = new Vendedor(nome, sexo, cpf, celular, Double.valueOf(comissao));
+					controllerVendedor.atualizarVendedor(novoVendedor);
 				} else {
 					JOptionPane.showMessageDialog(null, mensagem, "Aten��o", JOptionPane.WARNING_MESSAGE);
 				}

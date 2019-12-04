@@ -23,7 +23,7 @@ public class VendedorBO {
 		return vendedoresVO;
 	}
 	
-	public boolean atualizarVendedor(Vendedor novoVendedor) {
-		return dao.alterar(novoVendedor);
+	public void atualizarVendedor(Vendedor novoVendedor) {
+		dao.alterar(novoVendedor);
 	}
 }

@@ -44,4 +44,10 @@ public class ControllerVendedor {
 		return vendedorBO.consultarTodosVendedores();
 	}
 
+	public void atualizarVendedor(Vendedor novoVendedor) {
+		VendedorBO bo = new VendedorBO();
+		bo.atualizarVendedor(novoVendedor);
+		
+	}
+
 }

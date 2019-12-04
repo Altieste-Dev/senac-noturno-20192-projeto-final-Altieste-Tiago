@@ -75,7 +75,7 @@ public class VendedorDAO implements BaseDAO<Vendedor> {
 		Connection conexao = Banco.getConnection();
 		String sql = " UPDATE VENDEDOR"
 				+ " SET NOME=?, SEXO=?, CPF=?, CONTATO=?, COMISSAO=? "
-				+ " WHERE ID = ?";
+				+ " WHERE IDVENDEDOR = ?";
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql);
 		int registrosAlterados = 0;
 		try {
@@ -84,6 +84,7 @@ public class VendedorDAO implements BaseDAO<Vendedor> {
 			prepStmt.setString(3, novoVendedor.getCpf());
 			prepStmt.setString(4, novoVendedor.getCelular());
 			prepStmt.setDouble(5, novoVendedor.getComissao());
+			prepStmt.setInt(6, novoVendedor.getId());
 			registrosAlterados = prepStmt.executeUpdate();
 
 			if (registrosAlterados == 1) {

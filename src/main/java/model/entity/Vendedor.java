@@ -8,13 +8,14 @@ public class Vendedor {
 	private String celular;
 	private Double comissao;
 	
-	public Vendedor( int Id, String nome, String sexo, String cpf, String celular, Double comissao) {
+	public Vendedor(String nome, String sexo, String cpf, String celular, Double comissao) {
 		super();
 		this.nome = nome;
 		this.sexo = sexo;
 		this.cpf = cpf;
 		this.celular = celular;
 		this.comissao = comissao;
+		this.id = id;
 	}
 	
 	public Vendedor() {
@@ -72,8 +73,7 @@ public class Vendedor {
 
 	@Override
 	public String toString() {
-		return "nome: " + nome + ", sexo: " + sexo + ", cpf: " + cpf + ", celular: " + celular + ", comissao: "
-				+ comissao + "]";
+		return " NOME DO VENDEDOR: " + nome;
 	}
 
 
