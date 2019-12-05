@@ -73,7 +73,7 @@ public class CadastrarVendedor extends JPanel {
 		btnSalvarVendedor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ControllerVendedor controllerVendedor = new ControllerVendedor();
-
+				int id = 0;
 				String nome = txtNome.getText();
 				String sexo = " ";
 				String cpf = (String) txtCPF.getValue();
@@ -91,7 +91,7 @@ public class CadastrarVendedor extends JPanel {
 
 				String mensagem = controllerVendedor.validarCamposSalvar(nome, sexo, cpf, celular, comissao);
 				if (mensagem.isEmpty()) {
-					novoVendedor = new Vendedor(nome, sexo, cpf, celular, Double.valueOf(comissao));
+					novoVendedor = new Vendedor(id, nome, cpf, celular, Double.valueOf(comissao), sexo);
 					novoVendedor = controllerVendedor.salvar(novoVendedor);
 				}else {
 					JOptionPane.showMessageDialog(null, mensagem, "Atenção", JOptionPane.WARNING_MESSAGE);

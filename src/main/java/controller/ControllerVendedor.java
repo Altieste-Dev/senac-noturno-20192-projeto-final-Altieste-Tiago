@@ -14,11 +14,11 @@ public class ControllerVendedor {
 			mensagem += "Nome deve possuir pelo menos 3 letras \n";
 		}
 		
-		if (cpf.isEmpty() || cpf.trim().length() != 11) {
+		if (cpf == null || cpf.isEmpty() || cpf.trim().length() != 11) {
 			mensagem += "CPF deve possuir exatamente 11 dígitos \n";
 		}
 		
-		if (telefone.isEmpty() || telefone.trim().length() < 9) {
+		if (telefone == null || telefone.isEmpty() || telefone.trim().length() < 9) {
 			mensagem += "Telefone deve possuir pelo menos 9 números \n";
 		}
 
@@ -44,9 +44,13 @@ public class ControllerVendedor {
 		return vendedorBO.consultarTodosVendedores();
 	}
 
-	public void atualizarVendedor(Vendedor novoVendedor) {
+	public String atualizarVendedor(Vendedor novoVendedor) {
 		VendedorBO bo = new VendedorBO();
-		bo.atualizarVendedor(novoVendedor);
+		return bo.atualizarVendedor(novoVendedor);
+	}
+
+	public void excluirVendedor() {
+		// TODO Auto-generated method stub
 		
 	}
 
