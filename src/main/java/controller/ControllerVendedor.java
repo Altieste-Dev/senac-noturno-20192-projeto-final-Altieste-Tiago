@@ -6,6 +6,8 @@ import model.bo.VendedorBO;
 import model.entity.Vendedor;
 
 public class ControllerVendedor {
+	
+	private VendedorBO bo = new VendedorBO();
 
 	public String validarCamposSalvar(String nome, String sexo, String cpf, String telefone, String comissao) {
 		String mensagem = "";
@@ -35,22 +37,20 @@ public class ControllerVendedor {
 	}
 
 	public Vendedor salvar(Vendedor novoVendedor) {
-		VendedorBO bo = new VendedorBO();
 		return bo.salvar(novoVendedor);
 	}
 
 	public ArrayList<Vendedor> consultarTodosVendedores() {
-		VendedorBO vendedorBO = new VendedorBO();
-		return vendedorBO.consultarTodosVendedores();
+		return bo.consultarTodosVendedores();
 	}
 
 	public String atualizarVendedor(Vendedor novoVendedor) {
-		VendedorBO bo = new VendedorBO();
 		return bo.atualizarVendedor(novoVendedor);
 	}
 
-	public void excluirVendedor() {
-		// TODO Auto-generated method stub
+	public String excluirVendedor(Vendedor vendedor) {
+		
+		return bo.excluir(vendedor);
 		
 	}
 

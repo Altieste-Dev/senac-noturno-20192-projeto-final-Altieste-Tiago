@@ -123,10 +123,10 @@ public class ConsultarVendedor extends JPanel {
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ControllerVendedor controllerVendedor = new ControllerVendedor();
-				controllerVendedor = (ControllerVendedor) cbVendedor.getSelectedItem();
-				controllerVendedor.excluirVendedor();
+				Vendedor excluirVendedor = (Vendedor) cbVendedor.getSelectedItem();
+				String mensagem = controllerVendedor.excluirVendedor(excluirVendedor);
 
-
+				JOptionPane.showMessageDialog(null, mensagem);
 			}
 		});
 		add(btnExcluir, "flowx,cell 1 8");

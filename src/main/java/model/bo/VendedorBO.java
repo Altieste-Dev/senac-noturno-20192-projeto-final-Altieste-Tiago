@@ -35,4 +35,15 @@ public class VendedorBO {
 		
 		return mensagem;
 	}
+
+	public String excluir(Vendedor vendedor) {
+		String mensagem = "";
+		if (dao.excluir(vendedor.getId())) {
+			mensagem = "Vendedor " + vendedor.getNome() + " foi excluido com sucesso";
+		} else {
+			mensagem = "Erro ao excluir o vendedor " + vendedor.getNome();
+		}
+		
+		return mensagem;
+	}
 }
