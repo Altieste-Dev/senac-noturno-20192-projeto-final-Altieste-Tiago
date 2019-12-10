@@ -26,7 +26,7 @@ public class VendedorDAO implements BaseDAO<Vendedor> {
 			stmt.setString(3, novoVendedor.getCpf());
 			stmt.setString(4, novoVendedor.getCelular());
 			stmt.setDouble(5, novoVendedor.getComissao());
-			
+
 			stmt.execute();
 
 			ResultSet rs = stmt.getGeneratedKeys();
@@ -44,7 +44,7 @@ public class VendedorDAO implements BaseDAO<Vendedor> {
 
 	public boolean excluir(int id) {
 		Connection conexao = Banco.getConnection();
-		String sql = " DELETE FROM EMPREGADO WHERE ID = ?";
+		String sql = " DELETE FROM VENDEDOR WHERE IDVENDEDOR = ?";
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql);
 
 
@@ -69,9 +69,7 @@ public class VendedorDAO implements BaseDAO<Vendedor> {
 		return sucessoDelete;
 	}
 
-	public boolean alterar(Vendedor novoVendedor) {
-		boolean sucessoUpdate = false;
-
+	public boolean alterar(Vendedor vendedor) {
 		Connection conexao = Banco.getConnection();
 		String sql = " UPDATE VENDEDOR"
 				+ " SET NOME=?, SEXO=?, CPF=?, CONTATO=?, COMISSAO=? "
@@ -79,18 +77,13 @@ public class VendedorDAO implements BaseDAO<Vendedor> {
 		PreparedStatement prepStmt = Banco.getPreparedStatement(conexao, sql);
 		int registrosAlterados = 0;
 		try {
-			prepStmt.setString(1, novoVendedor.getNome());
-			prepStmt.setString(2, novoVendedor.getSexo());
-			prepStmt.setString(3, novoVendedor.getCpf());
-			prepStmt.setString(4, novoVendedor.getCelular());
-			prepStmt.setDouble(5, novoVendedor.getComissao());
-			prepStmt.setInt(6, novoVendedor.getId());
+			prepStmt.setString(1, vendedor.getNome());
+			prepStmt.setString(2, vendedor.getSexo());
+			prepStmt.setString(3, vendedor.getCpf());
+			prepStmt.setString(4, vendedor.getCelular());
+			prepStmt.setDouble(5, vendedor.getComissao());
+			prepStmt.setInt(6, vendedor.getId());
 			registrosAlterados = prepStmt.executeUpdate();
-
-			if (registrosAlterados == 1) {
-				sucessoUpdate = true;
-			}
-
 		} catch (SQLException e) {
 			System.out.println("Erro ao atualizar o vendedor. Causa: " + e.getMessage());
 		} finally {
@@ -98,43 +91,43 @@ public class VendedorDAO implements BaseDAO<Vendedor> {
 			Banco.closeConnection(conexao);
 		}
 
-		return sucessoUpdate;
+		return registrosAlterados > 0;
 	}
-	
-//	public Vendedor consultarPorId(int id) {
-//		String sql = " SELECT * FROM VENDEDOR " + "WHERE IDVENDEROR = " + id;
-//		Connection conn = Banco.getConnection();
-//		Statement stmt = Banco.getStatement(conn);
-//		
-//		Vendedor v = null;
-//		ResultSet rs = null;
-//		
-//		try {
-//			
-//			rs = stmt.executeQuery(sql);
-//
-//			while (rs.next()) {
-//				v = new Vendedor();
-//
-//				v.setIdVendedor(rs.getInt("IDVENDEDOR"));
-//				v.setNome(rs.getString("NOME"));
-//				v.setSexo(rs.getString("SEXO"));
-//				v.setCpf(rs.getString("CPF"));
-//				v.setCelular(rs.getString("CONTATO"));
-//				v.setComissao(rs.getDouble("COMISSAO"));
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally { 
-//			Banco.closeResultSet(rs);
-//			Banco.closePreparedStatement(stmt);
-//			Banco.closeConnection(conn);
-//		}
-//		
-//		
-//		return v;
-//				
-//	}
+
+	//	public Vendedor consultarPorId(int id) {
+	//		String sql = " SELECT * FROM VENDEDOR " + "WHERE IDVENDEROR = " + id;
+	//		Connection conn = Banco.getConnection();
+	//		Statement stmt = Banco.getStatement(conn);
+	//		
+	//		Vendedor v = null;
+	//		ResultSet rs = null;
+	//		
+	//		try {
+	//			
+	//			rs = stmt.executeQuery(sql);
+	//
+	//			while (rs.next()) {
+	//				v = new Vendedor();
+	//
+	//				v.setIdVendedor(rs.getInt("IDVENDEDOR"));
+	//				v.setNome(rs.getString("NOME"));
+	//				v.setSexo(rs.getString("SEXO"));
+	//				v.setCpf(rs.getString("CPF"));
+	//				v.setCelular(rs.getString("CONTATO"));
+	//				v.setComissao(rs.getDouble("COMISSAO"));
+	//			}
+	//		} catch (SQLException e) {
+	//			e.printStackTrace();
+	//		} finally { 
+	//			Banco.closeResultSet(rs);
+	//			Banco.closePreparedStatement(stmt);
+	//			Banco.closeConnection(conn);
+	//		}
+	//		
+	//		
+	//		return v;
+	//				
+	//	}
 
 	public Vendedor consultarPorId(int id) {
 		String sql = "SELECT * FROM VENDEDOR " + "WHERE id=?";
@@ -183,12 +176,12 @@ public class VendedorDAO implements BaseDAO<Vendedor> {
 
 		return vendedores;
 	}
-	
+
 	private Vendedor construirVendedorDoResultSet(ResultSet result) {
 		Vendedor v = new Vendedor();
 
 		try {
-		//	v.setId(result.getInt("ID"));
+			v.setId(result.getInt("IDVENDEDOR"));
 			v.setNome(result.getString("NOME"));
 			v.setSexo(result.getString("SEXO"));
 			v.setCpf(result.getString("CPF"));
@@ -199,7 +192,4 @@ public class VendedorDAO implements BaseDAO<Vendedor> {
 		}
 		return v;
 	}
-
-
-
 }

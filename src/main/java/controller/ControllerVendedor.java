@@ -6,6 +6,8 @@ import model.bo.VendedorBO;
 import model.entity.Vendedor;
 
 public class ControllerVendedor {
+	
+	private VendedorBO bo = new VendedorBO();
 
 	public String validarCamposSalvar(String nome, String sexo, String cpf, String telefone, String comissao) {
 		String mensagem = "";
@@ -14,11 +16,11 @@ public class ControllerVendedor {
 			mensagem += "Nome deve possuir pelo menos 3 letras \n";
 		}
 		
-		if (cpf.isEmpty() || cpf.trim().length() != 11) {
+		if (cpf == null || cpf.isEmpty() || cpf.trim().length() != 11) {
 			mensagem += "CPF deve possuir exatamente 11 dígitos \n";
 		}
 		
-		if (telefone.isEmpty() || telefone.trim().length() < 9) {
+		if (telefone == null || telefone.isEmpty() || telefone.trim().length() < 9) {
 			mensagem += "Telefone deve possuir pelo menos 9 números \n";
 		}
 
@@ -35,18 +37,20 @@ public class ControllerVendedor {
 	}
 
 	public Vendedor salvar(Vendedor novoVendedor) {
-		VendedorBO bo = new VendedorBO();
 		return bo.salvar(novoVendedor);
 	}
 
 	public ArrayList<Vendedor> consultarTodosVendedores() {
-		VendedorBO vendedorBO = new VendedorBO();
-		return vendedorBO.consultarTodosVendedores();
+		return bo.consultarTodosVendedores();
 	}
 
-	public void atualizarVendedor(Vendedor novoVendedor) {
-		VendedorBO bo = new VendedorBO();
-		bo.atualizarVendedor(novoVendedor);
+	public String atualizarVendedor(Vendedor novoVendedor) {
+		return bo.atualizarVendedor(novoVendedor);
+	}
+
+	public String excluirVendedor(Vendedor vendedor) {
+		
+		return bo.excluir(vendedor);
 		
 	}
 

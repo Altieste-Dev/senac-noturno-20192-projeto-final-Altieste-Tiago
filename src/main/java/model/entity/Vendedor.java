@@ -8,7 +8,7 @@ public class Vendedor {
 	private String celular;
 	private Double comissao;
 	
-	public Vendedor(String nome, String sexo, String cpf, String celular, Double comissao) {
+	public Vendedor(int id, String nome,  String cpf,  String celular, Double comissao, String sexo) {
 		super();
 		this.nome = nome;
 		this.sexo = sexo;
@@ -20,7 +20,6 @@ public class Vendedor {
 	
 	public Vendedor() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public int getId() {

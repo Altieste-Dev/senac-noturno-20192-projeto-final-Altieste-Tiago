@@ -6,6 +6,7 @@ import com.google.protobuf.TextFormat.ParseException;
 
 public class Vendas {
 	
+	int id;
 	Cliente cliente;
 	Vendedor vendedor;
 	Modelo modelo;
@@ -22,6 +23,17 @@ public class Vendas {
 		this.veiculo = veiculo;
 		this.precoDeVenda = precoDeVenda;
 		this.dataDaVenda = dataDaVenda;
+	}
+
+
+	
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 

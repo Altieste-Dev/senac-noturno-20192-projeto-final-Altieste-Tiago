@@ -23,7 +23,27 @@ public class VendedorBO {
 		return vendedoresVO;
 	}
 	
-	public void atualizarVendedor(Vendedor novoVendedor) {
-		dao.alterar(novoVendedor);
+	public String atualizarVendedor(Vendedor novoVendedor) {
+		boolean alterou = dao.alterar(novoVendedor);
+		
+		String mensagem = "";
+		if(alterou) {
+			mensagem = "Vendedor atualizado com sucesso";
+		}else {
+			mensagem = "Erro ao atualizar vendedor";
+		}
+		
+		return mensagem;
+	}
+
+	public String excluir(Vendedor vendedor) {
+		String mensagem = "";
+		if (dao.excluir(vendedor.getId())) {
+			mensagem = "Vendedor " + vendedor.getNome() + " foi excluido com sucesso";
+		} else {
+			mensagem = "Erro ao excluir o vendedor " + vendedor.getNome();
+		}
+		
+		return mensagem;
 	}
 }
