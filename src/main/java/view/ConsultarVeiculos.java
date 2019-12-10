@@ -1,22 +1,34 @@
 package view;
 
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
+import controller.ControllerVeiculo;
+import model.entity.Veiculo;
 import net.miginfocom.swing.MigLayout;
 
 public class ConsultarVeiculos extends JPanel {
-	//Alti
+	// Alti
 
-	private JTable table;
+	private JTable tabelaVeiculos;
+	private int larguraDosPaineis;
+	private int alturaDaTela;
+	private ArrayList<Veiculo> veiculos = new ArrayList<Veiculo>();
+	private String[] nomesColunas = { "Marca", "Modelo", "Ano", "Cor", "Quilometragem", "Placa", "Situacao",
+			"Valor Fipe" };
 
 	/**
 	 * Create the panel.
@@ -63,8 +75,8 @@ public class ConsultarVeiculos extends JPanel {
 		chckbxVendidos.setHorizontalTextPosition(JCheckBox.LEFT);
 		add(chckbxVendidos, "cell 11 2");
 
-		table = new JTable();
-		add(table, "cell 1 3 12 1,grow");
+		tabelaVeiculos = new JTable();
+		add(tabelaVeiculos, "cell 1 3 12 1,grow");
 
 		JButton btnImagem = new JButton("Ver foto");
 		btnImagem.addActionListener(new ActionListener() {
@@ -74,11 +86,55 @@ public class ConsultarVeiculos extends JPanel {
 		add(btnImagem, "cell 1 4");
 
 		JButton btnVender = new JButton("Vender");
+		btnVender.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Dimension dimensoesTela = Toolkit.getDefaultToolkit().getScreenSize();
+				larguraDosPaineis = (int) ((dimensoesTela.getWidth() - 20));
+				alturaDaTela = (int) (dimensoesTela.getHeight() - 10);
+
+				int linhaSelecionada = tabelaVeiculos.getSelectedRow();
+				if (linhaSelecionada >= 0) {
+					Veiculo veiculoVenda = veiculos.get(linhaSelecionada);
+
+					ConcluirVenda janelaConclusaoDeVenda = new ConcluirVenda();
+					janelaConclusaoDeVenda.setVeiculoVenda(veiculoVenda);
+					janelaConclusaoDeVenda.setVisible(true);
+					revalidate();
+				} else {
+					JOptionPane.showMessageDialog(null, "Selecione um Veículo");
+				}
+
+			}
+		});
 		add(btnVender, "cell 7 4");
 
 		JButton btnExcluir = new JButton("Excluir");
 		add(btnExcluir, "cell 9 4");
 
+		JButton btnConsultar = new JButton("Consultar");
+		btnConsultar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+
 	}
 
+	private void limparTabelaVeiculos() {
+		tabelaVeiculos.setModel(new DefaultTableModel(new Object[][] { nomesColunas, }, nomesColunas));
+	}
+
+	protected void atualizarTabelaVeiculos() {
+		veiculos = (ControllerVeiculo.consultarVeiculos());
+		limparTabelaVeiculos();
+
+		DefaultTableModel modeloVeiculos = (DefaultTableModel) tabelaVeiculos.getModel();
+		for (Veiculo emp : veiculos) {
+			String[] novaLinha = new String[5];
+			novaLinha[0] = emp.getModelo().getMarca();
+			novaLinha[1] = emp.getModelo().getModelo();
+			novaLinha[2] = emp.getCor();
+
+		}
+	}
 }

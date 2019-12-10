@@ -14,8 +14,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 public class MenuGeral extends JFrame {
-	//Alti
-
+	// Alti
 
 	private int larguraDosPaineis;
 	private int alturaDaTela;
@@ -71,9 +70,9 @@ public class MenuGeral extends JFrame {
 		mntmConsultarVendedor.setIcon(new ImageIcon(MenuGeral.class.getResource("/icons/icons8-decision-48.png")));
 		mntmConsultarVendedor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ConsultarVendedor painelCconsultarVendedor = new ConsultarVendedor();
-				painelCconsultarVendedor.setBounds(0, 0, larguraDosPaineis, alturaDaTela);
-				setContentPane(painelCconsultarVendedor);
+				ConsultarVendedor painelConsultarVendedor = new ConsultarVendedor();
+				painelConsultarVendedor.setBounds(0, 0, larguraDosPaineis, alturaDaTela);
+				setContentPane(painelConsultarVendedor);
 				revalidate();
 
 			}
