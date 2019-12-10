@@ -1,6 +1,7 @@
 package model.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,7 +25,7 @@ public class ClienteDAO implements BaseDAO<Cliente>{
 			stmt.setString(3, novoCliente.getCpf());
 			stmt.setString(4, novoCliente.getResidencial());
 			stmt.setString(5, novoCliente.getCelular());
-			stmt.setDate(6, novoCliente.getDataNascimento());
+			stmt.setDate(6, (Date) novoCliente.getDataNascimento());
 			stmt.execute();
 			
 			ResultSet rs = stmt.getGeneratedKeys();
