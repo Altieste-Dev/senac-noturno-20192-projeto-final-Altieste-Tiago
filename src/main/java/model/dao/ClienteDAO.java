@@ -5,11 +5,16 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import model.entity.Cliente;
 
 public class ClienteDAO implements BaseDAO<Cliente>{
+	
+	DateTimeFormatter dataFormatada = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+
 
 	public Cliente salvar(Cliente novoCliente) {
 		String sql = "INSERT INTO CLIENTE (NOME, SEXO, CPF, TEL_RESIDENCIAL,"
@@ -25,12 +30,13 @@ public class ClienteDAO implements BaseDAO<Cliente>{
 			stmt.setString(3, novoCliente.getCpf());
 			stmt.setString(4, novoCliente.getResidencial());
 			stmt.setString(5, novoCliente.getCelular());
-			stmt.setDate(6, (Date) novoCliente.getDataNascimento());
+			stmt.setDate(6, Date.valueOf(novoCliente.getDataNascimento()));
 			stmt.execute();
 			
 			ResultSet rs = stmt.getGeneratedKeys();
 			if(rs.next()) {
-				novoCliente.setId(rs.getInt(1));
+				int novoId = rs.getInt(1);
+				novoCliente.setIdCliente(novoId);
 			}
 			} catch (SQLException e) {
 				System.out.println("Erro ao inserir novo Cliente. ");
@@ -89,7 +95,7 @@ public class ClienteDAO implements BaseDAO<Cliente>{
 			prepStmt.setString(3, cliente.getCpf());
 			prepStmt.setString(4, cliente.getResidencial());
 			prepStmt.setString(5, cliente.getCelular());
-			prepStmt.setDate(6, cliente.getDataNascimento());
+			prepStmt.setDate(6, Date.valueOf(cliente.getDataNascimento()));
 			registrosAlterados = prepStmt.executeUpdate();
 			
 			if (registrosAlterados == 1) {
@@ -141,13 +147,17 @@ public class ClienteDAO implements BaseDAO<Cliente>{
 			while (result.next()) {
 			c = new Cliente();
 			
-			c.setId(result.getInt("ID"));
+			c.setIdCliente(result.getInt("ID"));
 			c.setNome(result.getString("NOME"));
 			c.setSexo(result.getString("SEXO"));
 			c.setCpf(result.getString("CPF"));
 			c.setResidencial(result.getString("TEL_RESIDENCIAL"));
 			c.setCelular(result.getString("TEL_CELULAR"));
-			c.setDataNascimento(result.getDate("DATA_NASCIMENTO"));
+//			
+//			Date dataNascBanco = c.getDate("DATA_NASCIMENTO");
+//			
+//			if (dataNasc != null) {
+//				LocalDate dataNasci = (LocalDate.parse(text))
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -160,14 +170,18 @@ public class ClienteDAO implements BaseDAO<Cliente>{
 		Cliente c = new Cliente();
 		
 		try {
-			c.setId(result.getInt("ID"));
+			c.setIdCliente(result.getInt("ID"));
 			c.setNome(result.getString("NOME"));
 			c.setSexo(result.getString("SEXO"));
 			c.setCpf(result.getString("CPF"));
 			c.setResidencial(result.getString("TEL_RESIDENCIAL"));
 			c.setCelular(result.getString("TEL_CELULAR"));
-			c.setDataNascimento(result.getDate("DATA_NASCIMENTO"));
+		
+			Date dataNascimentoBanco = result.getDate("DATA_NASCIMENTO");
 			
+			if(dataNascimentoBanco != null) {
+				LocalDate dataNascimento = (LocalDate.parse(dataNascimentoBanco.toString(), dataFormatada));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

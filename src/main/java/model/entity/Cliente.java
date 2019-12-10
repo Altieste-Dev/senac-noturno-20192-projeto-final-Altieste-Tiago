@@ -6,17 +6,17 @@ import java.util.Date;
 
 public class Cliente {
 
-	int id;
+	int idCliente;
 	String nome;
 	String sexo;
 	String cpf;
 	String celular;
 	String residencial;
-	Date dataNascimento; // ta certo isso? usar LocalDate no Eclipse e Date no Script
+	LocalDate dataNascimento; // ta certo isso? usar Date no Eclipse e Date no Script
 
-	public Cliente(int id, String nome, String sexo, String cpf, String celular, String residencial, Date dataNascimento) {
+	public Cliente(int id, String nome, String sexo, String cpf, String celular, String residencial, LocalDate dataNascimento) {
 		super();
-		this.id = id;
+		this.idCliente = id;
 		this.nome = nome;
 		this.sexo = sexo;
 		this.cpf = cpf;
@@ -30,11 +30,11 @@ public class Cliente {
 	}
 
 	public int getId() {
-		return id;
+		return idCliente;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setIdCliente(int id) {
+		this.idCliente = id;
 	}
 
 	public String getResidencial() {
@@ -45,11 +45,11 @@ public class Cliente {
 		this.residencial = residencial;
 	}
 
-	public Date getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 

@@ -3,8 +3,11 @@ package view;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import javax.swing.ButtonGroup;
@@ -16,6 +19,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
+
+import org.junit.runner.Request;
 
 import controller.ControllerCliente;
 import model.entity.Cliente;
@@ -30,7 +35,7 @@ public class CadastrarCliente extends JPanel {
 	private JTextField nomecliente;
 	private JFormattedTextField txtCpf;
 	private JFormattedTextField formattedTel;
-	JFormattedTextField formattedNascimento;
+	private JFormattedTextField formattedNascimento;
 	private JRadioButton rdbtnF;
 	private JRadioButton rdbtnM;
 
@@ -54,6 +59,7 @@ public class CadastrarCliente extends JPanel {
 		MaskFormatter mascaraCpf;
 		try {
 			mascaraCpf = new MaskFormatter("###.###.###-##");
+			mascaraCpf.setValueContainsLiteralCharacters(false);
 			txtCpf = new JFormattedTextField(mascaraCpf);
 		} catch (ParseException e) {
 		}
@@ -73,7 +79,7 @@ public class CadastrarCliente extends JPanel {
 				ControllerCliente cliController = new ControllerCliente();
 				Cliente cliente = new Cliente();
 				cliente.setNome(nomecliente.getText());
-				cliente.setCpf(txtCpf.getText());
+				cliente.setCpf((String) txtCpf.getValue());
 				if (rdbtnM.isSelected()) {
 					cliente.setSexo("Masculino");
 				}
@@ -81,7 +87,11 @@ public class CadastrarCliente extends JPanel {
 					cliente.setSexo("Feminino");
 				}
 				cliente.setCelular(formattedTel.getText());
-				Date nascimentoDigitado = (Date) formattedNascimento.getValue();
+				cliente.setResidencial(null);
+				
+				DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+				LocalDate nascimentoDigitado = LocalDate.parse((formattedNascimento.getText()), format);
+				
 				cliente.setDataNascimento(nascimentoDigitado);
 				
 				cliController.salvar(cliente);
@@ -105,6 +115,7 @@ public class CadastrarCliente extends JPanel {
 		MaskFormatter mascaraTel1;
 		try {
 			mascaraTel1 = new MaskFormatter("(##) #####-####");
+			mascaraTel1.setValueContainsLiteralCharacters(false);
 			formattedTel = new JFormattedTextField(mascaraTel1);
 		} catch (ParseException e) {
 		}
@@ -116,6 +127,7 @@ public class CadastrarCliente extends JPanel {
 		MaskFormatter mascaraNasc;
 		try {
 			mascaraNasc = new MaskFormatter("##/##/####");
+			mascaraNasc.setValueContainsLiteralCharacters(false);
 			formattedNascimento = new JFormattedTextField(mascaraNasc);
 		} catch (ParseException e) {
 		}
