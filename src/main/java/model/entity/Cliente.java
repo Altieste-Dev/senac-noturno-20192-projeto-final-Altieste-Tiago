@@ -1,7 +1,8 @@
 package model.entity;
 
-import java.sql.Date;
+
 import java.time.LocalDate;
+import java.util.Date;
 
 public class Cliente {
 

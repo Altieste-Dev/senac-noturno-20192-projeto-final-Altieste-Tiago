@@ -4,6 +4,8 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -79,8 +81,9 @@ public class CadastrarCliente extends JPanel {
 					cliente.setSexo("Feminino");
 				}
 				cliente.setCelular(formattedTel.getText());
-				String nascimentoDigitado = formattedNascimento.getText();
-
+				Date nascimentoDigitado = (Date) formattedNascimento.getValue();
+				cliente.setDataNascimento(nascimentoDigitado);
+				
 				cliController.salvar(cliente);
 			}
 		});
