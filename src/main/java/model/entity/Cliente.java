@@ -14,9 +14,9 @@ public class Cliente {
 	String residencial;
 	LocalDate dataNascimento; // ta certo isso? usar Date no Eclipse e Date no Script
 
-	public Cliente(int id, String nome, String sexo, String cpf, String celular, String residencial, LocalDate dataNascimento) {
+	public Cliente(int idCliente, String nome, String sexo, String cpf, String celular, String residencial, LocalDate dataNascimento) {
 		super();
-		this.idCliente = id;
+		this.idCliente = idCliente;
 		this.nome = nome;
 		this.sexo = sexo;
 		this.cpf = cpf;
@@ -33,8 +33,8 @@ public class Cliente {
 		return idCliente;
 	}
 
-	public void setIdCliente(int id) {
-		this.idCliente = id;
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
 	}
 
 	public String getResidencial() {

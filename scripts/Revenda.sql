@@ -12,7 +12,7 @@ USE `mydb` ;
 -- Table `mydb`.`Cliente`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Cliente` (
-  `idCliente` INT NOT NULL,
+  `idCliente` INT NOT NULL AUTO_INCREMENT,
   `Nome` VARCHAR(45) NULL,
   `Sexo` VARCHAR(15) NULL,
   `CPF` VARCHAR(11) NULL,
@@ -27,7 +27,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`Vendedor`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Vendedor` (
-  `idVendedor` INT NOT NULL,
+  `idVendedor` INT NOT NULL AUTO_INCREMENT,
   `Nome` VARCHAR(45) NULL,
   `Sexo` VARCHAR(45) NULL,
   `CPF` VARCHAR(11) NULL,
@@ -41,7 +41,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`Carro`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Carro` (
-  `idCarro` INT NOT NULL,
+  `idCarro` INT NOT NULL AUTO_INCREMENT,
   `Marca` VARCHAR(255) NULL,
   `Modelo` VARCHAR(255) NULL,
   PRIMARY KEY (`idCarro`))
@@ -52,7 +52,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`Estoque`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Estoque` (
-  `idEstoque` INT NOT NULL,
+  `idEstoque` INT NOT NULL AUTO_INCREMENT,
   `ano` YEAR NULL,
   `cor` VARCHAR(45) NULL,
   `quilometragem` DOUBLE NULL,
@@ -74,7 +74,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`Vendas`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Vendas` (
-  `idVendas` INT NOT NULL,
+  `idVendas` INT NOT NULL AUTO_INCREMENT,
   `Valor_Revenda` DOUBLE NOT NULL,
   `Data_Venda` DATE NOT NULL,
   `Cliente_idCliente1` INT NOT NULL,

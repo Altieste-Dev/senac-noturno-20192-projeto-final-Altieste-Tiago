@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.ParseException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
@@ -16,17 +17,25 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.text.MaskFormatter;
 
+import controller.ControllerCliente;
+import model.entity.Cliente;
 import net.miginfocom.swing.MigLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.table.DefaultTableModel;
 
 public class ConsultarCliente extends JPanel {
 	// Alti
 
-	private JTable table;
+	private JTable tblClientes;
 	private JTextField nomeconsultacliente;
 	JFormattedTextField formattedCpf;
 	JFormattedTextField formattedNasci;
 	private int larguraDosPaineis;
 	private int alturaDaTela;
+	private ControllerCliente controller = new ControllerCliente();
+	private Cliente cliente = new Cliente();
+	private ArrayList<Cliente> clientes = new ArrayList<Cliente>();
 
 	/**
 	 * Create the panel.
@@ -40,8 +49,16 @@ public class ConsultarCliente extends JPanel {
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		add(lblNewLabel, "cell 0 0 5 1,grow");
 
-		table = new JTable();
-		add(table, "cell 0 7 5 1,grow");
+		tblClientes = new JTable();
+		tblClientes.setModel(new DefaultTableModel(
+			new Object[][] {
+				{"Nome", "Sexo", "CPF", "Celular", null},
+			},
+			new String[] {
+				"Nome", "Sexo", "CPF", "Celular", "Nascimento"
+			}
+		));
+		add(tblClientes, "cell 0 7 5 1,grow");
 
 		JLabel lblNome = new JLabel("Nome:");
 		add(lblNome, "cell 0 1,alignx center,aligny top");
@@ -51,6 +68,14 @@ public class ConsultarCliente extends JPanel {
 		nomeconsultacliente.setColumns(10);
 
 		JButton btnConsultarClientes = new JButton("Consultar");
+		btnConsultarClientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				clientes = controller.consultarClientes();
+				atualizarTabelaClientes(clientes);
+				
+			}
+		});
 		add(btnConsultarClientes, "cell 0 8,alignx center,aligny top");
 
 		JButton btnEditar = new JButton("Editar");
@@ -93,5 +118,35 @@ public class ConsultarCliente extends JPanel {
 		} catch (ParseException e) {
 		}
 		add(formattedNasci, "cell 2 4 1 3,growx,aligny top");
+	}
+	
+	protected void atualizarTabelaClientes(ArrayList<Cliente> clientes2) {
+		limparTabelaClientes();
+		
+		DefaultTableModel model = (DefaultTableModel) tblClientes.getModel();
+		
+		Object novaLinha [] = new Object[5];
+		for (Cliente cliente: clientes) {
+			novaLinha[0] = cliente.getNome();
+			novaLinha[1] = cliente.getSexo();
+			novaLinha[2] = cliente.getCpf();
+			novaLinha[3] = cliente.getCelular();
+			novaLinha[4] = String.valueOf(cliente.getDataNascimento());
+			
+			model.addRow(novaLinha);
+		}
+		
+	}
+
+	private void limparTabelaClientes() {
+		tblClientes.setModel(new DefaultTableModel(
+				new Object[][] {
+					{"Nome", "Sexo", "CPF", "Celular", null},
+				},
+				new String[] {
+					"Nome", "Sexo", "CPF", "Celular", "Nascimento"
+				}
+			));
+		
 	}
 }

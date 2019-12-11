@@ -147,7 +147,7 @@ public class ClienteDAO implements BaseDAO<Cliente>{
 			while (result.next()) {
 			c = new Cliente();
 			
-			c.setIdCliente(result.getInt("ID"));
+			c.setIdCliente(result.getInt("IDCLIENTE"));
 			c.setNome(result.getString("NOME"));
 			c.setSexo(result.getString("SEXO"));
 			c.setCpf(result.getString("CPF"));
@@ -168,23 +168,29 @@ public class ClienteDAO implements BaseDAO<Cliente>{
 
 	private Cliente construirClienteDoResultSet (ResultSet result) {
 		Cliente c = new Cliente();
-		
+
 		try {
-			c.setIdCliente(result.getInt("ID"));
+			c.setIdCliente(result.getInt("IDCLIENTE"));
 			c.setNome(result.getString("NOME"));
 			c.setSexo(result.getString("SEXO"));
 			c.setCpf(result.getString("CPF"));
 			c.setResidencial(result.getString("TEL_RESIDENCIAL"));
 			c.setCelular(result.getString("TEL_CELULAR"));
 		
-			Date dataNascimentoBanco = result.getDate("DATA_NASCIMENTO");
+		LocalDate dataNascimentoBanco = result.getDate("DATA_NASCIMENTO").toLocalDate();
 			
-			if(dataNascimentoBanco != null) {
-				LocalDate dataNascimento = (LocalDate.parse(dataNascimentoBanco.toString(), dataFormatada));
-			}
+//			if(dataNascimentoBanco != null) {
+//				dataNascimento = (LocalDate.parse((CharSequence)dataNascimentoBanco.toString(), dataFormatada));
+//				c.setDataNascimento(dataNascimento);
+//			}
+			c.setDataNascimento(dataNascimentoBanco);
+			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("Erro ao construir cliente do ResultSet ");
+			System.out.println("Erro: " + e.getMessage());
+			
 		}
+			
 		return c;
 	}
 }
