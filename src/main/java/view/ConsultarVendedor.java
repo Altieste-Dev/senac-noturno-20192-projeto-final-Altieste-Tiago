@@ -2,6 +2,8 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.text.ParseException;
 import java.util.ArrayList;
 
@@ -19,11 +21,9 @@ import javax.swing.text.MaskFormatter;
 import controller.ControllerVendedor;
 import model.entity.Vendedor;
 import net.miginfocom.swing.MigLayout;
-import java.awt.event.ItemListener;
-import java.awt.event.ItemEvent;
 
 public class ConsultarVendedor extends JPanel {
-	//Alti
+	// Alti
 
 	private JTextField textNome;
 	private JFormattedTextField textCPF;
@@ -49,11 +49,10 @@ public class ConsultarVendedor extends JPanel {
 
 		cbVendedor.setToolTipText("Escolha um vendedor da Lista de Vendedores Cadastrados");
 
-
-		//		for (Vendedor user : vendedores) {
-		//			cbVendedor.addItem(user);
-		//			
-		//		}
+		// for (Vendedor user : vendedores) {
+		// cbVendedor.addItem(user);
+		//
+		// }
 
 		add(cbVendedor, "cell 1 0,growx");
 
@@ -74,7 +73,7 @@ public class ConsultarVendedor extends JPanel {
 			mascaraCpf1.setOverwriteMode(true);
 			mascaraCpf1.setValidCharacters("0123456789");
 			textCPF = new JFormattedTextField(mascaraCpf1);
-			
+
 		} catch (ParseException e) {
 		}
 		add(textCPF, "cell 1 3,growx");
@@ -86,7 +85,7 @@ public class ConsultarVendedor extends JPanel {
 		JLabel lblTelefone = new JLabel("Telefone:");
 		add(lblTelefone, "cell 0 5,alignx trailing");
 
-		//	textTel = new JTextField();
+		// textTel = new JTextField();
 		MaskFormatter mascaraTel1;
 		try {
 			mascaraTel1 = new MaskFormatter("(##) #####-####");
@@ -94,7 +93,7 @@ public class ConsultarVendedor extends JPanel {
 			mascaraTel1.setOverwriteMode(true);
 			mascaraTel1.setValidCharacters("0123456789");
 			textTel = new JFormattedTextField(mascaraTel1);
-			
+
 		} catch (ParseException e) {
 		}
 		add(textTel, "cell 1 5,growx");
@@ -136,8 +135,8 @@ public class ConsultarVendedor extends JPanel {
 				vendedorSelecionado = (Vendedor) cbVendedor.getSelectedItem();
 
 				textNome.setText(vendedorSelecionado.getNome());
-				textCPF.setText(vendedorSelecionado.getCpf()); 
-				textTel.setText(vendedorSelecionado.getCelular()); 
+				textCPF.setText(vendedorSelecionado.getCpf());
+				textTel.setText(vendedorSelecionado.getCelular());
 				textComissao.setText(vendedorSelecionado.getComissao().toString());
 
 				String sexo = vendedorSelecionado.getSexo().toString();
@@ -146,7 +145,7 @@ public class ConsultarVendedor extends JPanel {
 					rbSexFem.setSelected(true);
 				}
 
-				if (sexo.equals("M") ) {
+				if (sexo.equals("M")) {
 					rbSexMas.setSelected(true);
 				}
 			}
@@ -156,7 +155,7 @@ public class ConsultarVendedor extends JPanel {
 		btnAlterarVendedor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ControllerVendedor controllerVendedor = new ControllerVendedor();
-				vendedorSelecionado = (Vendedor) cbVendedor.getSelectedItem();	
+				vendedorSelecionado = (Vendedor) cbVendedor.getSelectedItem();
 
 				String nome = textNome.getText();
 				String sexo = " ";
@@ -175,12 +174,13 @@ public class ConsultarVendedor extends JPanel {
 				String mensagem = controllerVendedor.validarCamposSalvar(nome, sexo, cpf, celular, comissao);
 				if (mensagem.isEmpty()) {
 					Double comissaoDouble = Double.valueOf(comissao);
-					vendedorSelecionado = new Vendedor(vendedorSelecionado.getId(), nome, cpf, celular, comissaoDouble, sexo);
+					vendedorSelecionado = new Vendedor(vendedorSelecionado.getId(), nome, cpf, celular, comissaoDouble,
+							sexo);
 					mensagem = controllerVendedor.atualizarVendedor(vendedorSelecionado);
-					
+
 					JOptionPane.showMessageDialog(null, mensagem, "Mensagem", JOptionPane.INFORMATION_MESSAGE);
 				} else {
-					JOptionPane.showMessageDialog(null, mensagem, "Atenção", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, mensagem, "AtenÃ§Ã£o", JOptionPane.WARNING_MESSAGE);
 				}
 			}
 		});

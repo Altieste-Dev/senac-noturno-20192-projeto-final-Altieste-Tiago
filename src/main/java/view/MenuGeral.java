@@ -142,6 +142,15 @@ public class MenuGeral extends JFrame {
 		menuBar.add(mnRelatrio);
 
 		JMenuItem mntmGerar = new JMenuItem("Gerar");
+		mntmGerar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				GerarRelatorio janelaGerarRelatorios = new GerarRelatorio();
+				janelaGerarRelatorios.setVisible(true);
+				revalidate();
+
+			}
+		});
 		mntmGerar.setIcon(new ImageIcon(MenuGeral.class.getResource("/icons/icons8-answers-48.png")));
 		mnRelatrio.add(mntmGerar);
 

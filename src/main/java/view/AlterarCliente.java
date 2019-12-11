@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,19 +9,22 @@ import java.text.ParseException;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
 import controller.ControllerCliente;
 import model.entity.Cliente;
 import net.miginfocom.swing.MigLayout;
 
-public class AlterarCliente extends JPanel {
-	// Alti teste
+public class AlterarCliente extends JFrame {
+
+	private JPanel contentPane;
 
 	protected static final String SEXO_MASCULINO = "M";
 	protected static final String SEXO_FEMININO = "F";
@@ -31,11 +35,27 @@ public class AlterarCliente extends JPanel {
 	private JRadioButton rdbtnF;
 	private JRadioButton rdbtnM;
 
-	/**
-	 * Create the panel.
-	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					AlterarCliente frame = new AlterarCliente();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
 	public AlterarCliente() {
-		setLayout(new MigLayout("", "[122px,fill][24px,fill][45px][12px][235px]",
+
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(new MigLayout("", "[122px,fill][24px,fill][45px][12px][235px]",
 				"[16px][26px][26px][23px][26px][26px][29px]"));
 
 		nomecliente = new JTextField();

@@ -1,8 +1,10 @@
 package view;
 
+import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.ParseException;
 
 import javax.swing.JButton;
@@ -17,7 +19,7 @@ import javax.swing.text.MaskFormatter;
 import net.miginfocom.swing.MigLayout;
 
 public class ConsultarCliente extends JPanel {
-	//Alti
+	// Alti
 
 	private JTable table;
 	private JTextField nomeconsultacliente;
@@ -52,10 +54,17 @@ public class ConsultarCliente extends JPanel {
 		add(btnConsultarClientes, "cell 0 8,alignx center,aligny top");
 
 		JButton btnEditar = new JButton("Editar");
-		btnEditar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				AlterarCliente painelAlterarCliente = new AlterarCliente();
-				painelAlterarCliente.setVisible(true);
+		btnEditar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Dimension dimensoesTela = Toolkit.getDefaultToolkit().getScreenSize();
+				larguraDosPaineis = (int) ((dimensoesTela.getWidth() - 20));
+				alturaDaTela = (int) (dimensoesTela.getHeight() - 10);
+
+				AlterarCliente janelaAlterarCliente = new AlterarCliente();
+				janelaAlterarCliente.setVisible(true);
+				revalidate();
+
 			}
 		});
 		add(btnEditar, "cell 2 8,alignx center");
